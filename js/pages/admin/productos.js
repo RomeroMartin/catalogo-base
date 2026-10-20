@@ -1,10 +1,11 @@
 // Pestaña Productos: lista con filtros rápidos, alta/edición (con modelos) y baja.
-// Guardado NO atómico, en este orden: 1) producto  2) modelos (diferencia por id)  3) fotos (Fase 9).
+// Guardado NO atómico, en este orden: 1) fotos nuevas (compresión + subida)  2) producto  3) modelos (diferencia por id).
 import { supabase } from '../../supabase-client.js';
 import { esc, on, toast, cerrarModal } from '../../lib/dom.js';
 import { money } from '../../lib/format.js';
 import { imgUrl } from '../../lib/image-url.js';
 import { abrirDialogo, confirmar, conCarga, claseStock } from './util.js';
+import { MAX_FOTOS, procesarImagen, subirFoto, borrarArchivos, rutasDe, kb } from '../../lib/image-upload.js';
 
 let contenedor = null;
 let productos = [];
@@ -59,7 +60,11 @@ const campo = (id, label, control, hint = '') =>
 
 function abrirFormulario(producto = null) {
   const esNuevo = !producto;
+  let existe = !esNuevo; // ¿el producto ya está guardado en la base? (si un guardado falla a mitad, el reintento actualiza en vez de insertar)
   const p = producto ?? { id: crypto.randomUUID(), nombre: '', categoria_id: categorias[0]?.id, precio: 0, descripcion: '', descripcion_larga: '', orden: 0, destacado: false, disponible: true, tiene_variantes: false, stock: 0, modelos: [], emoji: '' };
+  // Fotos: las que ya tiene el producto + las nuevas elegidas (se comprimen y suben recién al guardar)
+  let fotos = (p.imagenes ?? []).map((im) => ({ id: crypto.randomUUID(), existente: im, archivo: null, preview: imgUrl(im.thumb), subida: null }));
+  const removidas = []; // fotos existentes que se quitaron: sus archivos se borran después de guardar bien
   const modelosIniciales = p.tiene_variantes ? [...p.modelos].sort((a, b) => a.orden - b.orden) : [];
 
   const el = abrirDialogo({
@@ -83,12 +88,63 @@ function abrirFormulario(producto = null) {
         <div><button class="btn btn-sm" type="button" data-agregar-modelo>+ Agregar modelo</button></div>
         <span class="field-error" id="error-modelos" role="alert"></span>
       </div>
-      <p class="muted" style="font-size:.9rem">Las fotos se cargan en la próxima etapa (Fase 9). Las que ya tenga el producto se conservan.</p>
+      <div class="stack" id="bloque-fotos">
+        <span class="label">Fotos <span class="muted" id="cuenta-fotos"></span></span>
+        <div class="photos" id="grilla-fotos"></div>
+        <label class="dropzone" id="zona-fotos" for="f-fotos"><input class="sr-only" id="f-fotos" type="file" accept="image/*" multiple><span>Tocá para elegir fotos o arrastralas acá<br><span class="muted" style="font-size:.85rem">La primera es la portada. Se achican solas antes de subirse.</span></span></label>
+        <div class="muted" id="progreso-fotos" role="status" aria-live="polite"></div>
+      </div>
       <div class="form-error hidden" id="msg-producto" role="alert"></div>`,
     pie: `<button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn btn-primary" type="submit">Guardar</button>`,
+    alCerrar: () => fotos.forEach((f) => { if (f.archivo) URL.revokeObjectURL(f.preview); }),
   });
 
   const form = el.querySelector('#form-producto');
+  const grilla = el.querySelector('#grilla-fotos');
+  const progreso = (texto) => { el.querySelector('#progreso-fotos').textContent = texto; };
+
+  function pintarFotos() {
+    el.querySelector('#cuenta-fotos').textContent = `(${fotos.length} de ${MAX_FOTOS})`;
+    grilla.innerHTML = fotos.map((f, i) => `
+      <div class="photo" data-fid="${f.id}">
+        <img src="${esc(f.preview)}" alt="Foto ${i + 1}${i === 0 ? ' (portada)' : ''}" width="110" height="110">
+        ${i === 0 ? '<span class="badge badge-primary" style="position:absolute;top:4px;left:4px">Portada</span>' : ''}
+        ${f.archivo ? '<span class="badge" style="position:absolute;top:4px;right:4px">Nueva</span>' : ''}
+        <div class="photo-tools">
+          <span>
+            <button class="btn btn-ghost btn-sm" type="button" data-foto-sube aria-label="Subir foto ${i + 1}" ${i === 0 ? 'disabled' : ''}><span aria-hidden="true">↑</span></button>
+            <button class="btn btn-ghost btn-sm" type="button" data-foto-baja aria-label="Bajar foto ${i + 1}" ${i === fotos.length - 1 ? 'disabled' : ''}><span aria-hidden="true">↓</span></button>
+          </span>
+          <button class="btn btn-ghost btn-sm" type="button" data-foto-quitar aria-label="Quitar foto ${i + 1}"><span aria-hidden="true">✕</span></button>
+        </div>
+      </div>`).join('');
+  }
+
+  function agregarArchivos(lista) {
+    const imagenes = [...lista].filter((a) => a.type.startsWith('image/') || /\.(heic|heif|jpe?g|png|webp|gif)$/i.test(a.name));
+    const lugar = MAX_FOTOS - fotos.length;
+    if (imagenes.length > lugar) toast(`Máximo ${MAX_FOTOS} fotos por producto`, 'error');
+    imagenes.slice(0, Math.max(lugar, 0)).forEach((archivo) => fotos.push({ id: crypto.randomUUID(), existente: null, archivo, preview: URL.createObjectURL(archivo), subida: null }));
+    pintarFotos();
+  }
+
+  pintarFotos();
+  el.querySelector('#f-fotos').addEventListener('change', (ev) => { agregarArchivos(ev.target.files); ev.target.value = ''; });
+  const zona = el.querySelector('#zona-fotos');
+  ['dragenter', 'dragover'].forEach((n) => zona.addEventListener(n, (ev) => { ev.preventDefault(); zona.classList.add('is-over'); }));
+  ['dragleave', 'drop'].forEach((n) => zona.addEventListener(n, (ev) => { ev.preventDefault(); zona.classList.remove('is-over'); }));
+  zona.addEventListener('drop', (ev) => agregarArchivos(ev.dataTransfer.files));
+
+  const indiceFoto = (b) => fotos.findIndex((f) => f.id === b.closest('[data-fid]').dataset.fid);
+  const mover = (i, delta) => { const j = i + delta; if (j < 0 || j >= fotos.length) return; [fotos[i], fotos[j]] = [fotos[j], fotos[i]]; pintarFotos(); };
+  on(el, 'click', '[data-foto-sube]', (_e, b) => mover(indiceFoto(b), -1));
+  on(el, 'click', '[data-foto-baja]', (_e, b) => mover(indiceFoto(b), 1));
+  on(el, 'click', '[data-foto-quitar]', (_e, b) => {
+    const [f] = fotos.splice(indiceFoto(b), 1);
+    if (f.archivo) URL.revokeObjectURL(f.preview);
+    if (f.existente) removidas.push(f.existente);
+    pintarFotos();
+  });
   const alternarBloques = () => {
     const v = form.elements.tiene_variantes.checked;
     el.querySelector('#bloque-simple').classList.toggle('hidden', v);
@@ -135,20 +191,53 @@ function abrirFormulario(producto = null) {
     if (!ok) return;
 
     await conCarga(btn, async () => {
+      const subidasEstaVez = []; // fotos subidas en ESTE intento (si el producto no se guarda, se borran)
       try {
+        // 1) Fotos nuevas: se comprimen y suben de a una (así no se agota la memoria en celulares viejos)
+        const nuevasFotos = fotos.filter((f) => f.archivo && !f.subida);
+        for (const [i, f] of nuevasFotos.entries()) {
+          try {
+            progreso(`Comprimiendo foto ${i + 1} de ${nuevasFotos.length}…`);
+            const proc = await procesarImagen(f.archivo);
+            progreso(`Subiendo foto ${i + 1} de ${nuevasFotos.length}… (${kb(proc.thumb.blob.size)} + ${kb(proc.full.blob.size)})`);
+            f.subida = await subirFoto(p.id, proc);
+            subidasEstaVez.push(f);
+          } catch (errFoto) {
+            console.error(errFoto);
+            await borrarArchivos(rutasDe(subidasEstaVez.map((x) => x.subida)));
+            subidasEstaVez.forEach((x) => { x.subida = null; });
+            progreso('');
+            msg.textContent = /No pudimos leer|sigue pesando/.test(errFoto.message) ? errFoto.message : 'No pudimos subir las fotos. Revisá tu conexión y probá de nuevo.';
+            msg.classList.remove('hidden');
+            return;
+          }
+        }
+        const imagenes = fotos.map((f) => f.existente ?? f.subida);
+
+        // 2) Producto
+        progreso('Guardando…');
         const fila = {
           nombre, categoria_id: Number(v.categoria.value), precio, emoji: v.emoji.value.trim(),
           descripcion: v.descripcion.value.trim(), descripcion_larga: v.descripcion_larga.value.trim() || null,
           orden: Number(v.orden.value) || 0, destacado: v.destacado.checked, disponible: v.disponible.checked,
-          tiene_variantes: variantes, stock: variantes ? 0 : stock,
+          tiene_variantes: variantes, stock: variantes ? 0 : stock, imagenes,
         };
-        // 1) Producto
-        const r1 = esNuevo
-          ? await supabase.from('productos').insert({ id: p.id, ...fila })
-          : await supabase.from('productos').update(fila).eq('id', p.id);
-        if (r1.error) throw r1.error;
+        const r1 = existe
+          ? await supabase.from('productos').update(fila).eq('id', p.id)
+          : await supabase.from('productos').insert({ id: p.id, ...fila });
+        if (r1.error) {
+          // No se guardó: las fotos recién subidas quedarían huérfanas, se borran
+          await borrarArchivos(rutasDe(subidasEstaVez.map((x) => x.subida)));
+          subidasEstaVez.forEach((x) => { x.subida = null; });
+          throw r1.error;
+        }
+        existe = true;
+        // Las fotos subidas ya forman parte del producto; las quitadas se borran del bucket (al mejor esfuerzo)
+        fotos.forEach((f) => { if (f.subida) { f.existente = f.subida; } });
+        await borrarArchivos(rutasDe(removidas));
+        removidas.length = 0;
 
-        // 2) Modelos: se borran los quitados, se actualizan los existentes y se insertan los nuevos
+        // 3) Modelos: se borran los quitados, se actualizan los existentes y se insertan los nuevos
         const originales = p.modelos.map((m) => m.id);
         const conservados = filas.filter((m) => m.id).map((m) => m.id);
         const aBorrar = originales.filter((id) => !conservados.includes(id));
@@ -160,6 +249,7 @@ function abrirFormulario(producto = null) {
         const nuevos = filas.filter((x) => !x.id).map((m) => ({ producto_id: p.id, nombre: m.nombre, stock: m.stock, orden: m.orden }));
         if (nuevos.length) { const r = await supabase.from('modelos').insert(nuevos); if (r.error) throw r.error; }
 
+        progreso('');
         cerrarModal(el);
         toast('Producto guardado', 'ok');
         await recargar();
@@ -169,6 +259,7 @@ function abrirFormulario(producto = null) {
           ? 'Ya existe un modelo con ese nombre en este producto.'
           : 'No pudimos guardar todo. Revisá los datos y probá de nuevo (el formulario sigue abierto).';
         msg.classList.remove('hidden');
+        progreso('');
       }
     });
   });

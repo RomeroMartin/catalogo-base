@@ -26,7 +26,7 @@ export async function conCarga(boton, tarea) {
 }
 
 // Diálogo genérico. Devuelve el elemento .modal; se elimina del DOM al cerrarse.
-export function abrirDialogo({ titulo, cuerpo, pie = '', formId = '' }) {
+export function abrirDialogo({ titulo, cuerpo, pie = '', formId = '', alCerrar = null }) {
   const el = document.createElement('div');
   el.className = 'modal';
   el.setAttribute('role', 'dialog');
@@ -38,7 +38,7 @@ export function abrirDialogo({ titulo, cuerpo, pie = '', formId = '' }) {
     ${formId ? `<form id="${formId}" novalidate>${interior}</form>` : interior}`;
   document.body.append(el);
   on(el, 'click', '[data-cerrar]', () => cerrarModal(el));
-  abrirModal(el, { onClose: () => setTimeout(() => el.remove(), 300) });
+  abrirModal(el, { onClose: () => { if (alCerrar) alCerrar(); setTimeout(() => el.remove(), 300); } });
   return el;
 }
 
