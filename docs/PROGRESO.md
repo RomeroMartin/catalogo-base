@@ -6,8 +6,8 @@
 | 1 Base de datos | ✅ | 2026-10-20 | Tests RLS 36/36 OK en Supabase real; admin creado |
 | 2 Diseño visual | ✅ | 2026-10-20 | CSS y styleguide hechos; falta aprobación de Martin (Parada 2). Ajustes vs plan: --color-whatsapp #1A7F44 (contraste AA con texto blanco), --color-muted #6B625B, nuevo --color-warning |
 | 3 Esqueleto y capa de datos | ✅ | 2026-10-20 | Desplegado en Cloudflare Pages; Martin verificó. CSP: se agregó cdn.jsdelivr.net a connect-src (sourcemaps) |
-| 4 Autenticación | 🟨 en curso | 2026-10-20 | cuenta.js: registro, login, olvidé contraseña, nueva contraseña, header; falta prueba real de Martin (Parada 4) |
-| 5 Home y catálogo | ⬜ pendiente | | |
+| 4 Autenticación | ✅ | 2026-10-20 | Verificada por Martin en Cloudflare |
+| 5 Home y catálogo | 🟨 en curso | 2026-10-20 | Home, catálogo y modal listos; botón Agregar es provisorio (aviso) hasta la Fase 6; falta prueba real de Martin (Parada 5) |
 | 6 Carrito y pedidos | ⬜ pendiente | | |
 | 7 Cuenta del cliente | ⬜ pendiente | | |
 | 8 Panel de administración | ⬜ pendiente | | |
