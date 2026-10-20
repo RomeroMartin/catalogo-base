@@ -1,0 +1,17 @@
+/* ============================================================
+   cuenta.css — login/registro, perfil, historial de pedidos
+   ============================================================ */
+.auth-box { max-width: 440px; margin: var(--space-7) auto; padding: var(--space-5); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+.tabs { display: flex; gap: var(--space-1); padding: 4px; background: var(--color-bg); border-radius: 999px; margin-bottom: var(--space-5); }
+.tabs button { flex: 1; min-height: var(--tap); border: 0; border-radius: 999px; background: transparent; font-weight: 600; cursor: pointer; color: var(--color-muted); }
+.tabs button[aria-selected="true"] { background: var(--color-surface); color: var(--color-ink); box-shadow: var(--shadow-sm); }
+
+.account-grid { display: grid; gap: var(--space-5); margin-block: var(--space-6); }
+@media (min-width: 900px) { .account-grid { grid-template-columns: 360px 1fr; align-items: start; } }
+.panel { padding: var(--space-5); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius); }
+
+.order { border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-surface); }
+.order + .order { margin-top: var(--space-3); }
+.order summary { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); align-items: center; justify-content: space-between; padding: var(--space-4); min-height: var(--tap); cursor: pointer; }
+.order-detail { padding: 0 var(--space-4) var(--space-4); display: grid; gap: var(--space-2); }
+.order-detail li { display: flex; justify-content: space-between; gap: var(--space-3); }
