@@ -51,6 +51,10 @@ function formularioContacto() {
 try {
   const store = await getStore();
   applyBranding(store);
+  // Si el cliente no completó el título de la portada, se usa el nombre de la tienda; sin "sobre nosotros", se oculta la sección
+  const { config } = store;
+  if (!config.hero_titulo) { const h1 = $('h1[data-config="hero_titulo"]'); h1.textContent = config.nombre_tienda; h1.classList.remove('hidden'); }
+  if (!config.sobre_titulo && !config.sobre_texto) $('#sobre')?.classList.add('hidden');
   pintarCategorias(store.categorias);
 } catch (err) {
   console.error('No se pudo cargar la configuración de la tienda', err);

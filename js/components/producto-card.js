@@ -26,7 +26,8 @@ export function emojiSiFalla(contenedor) {
 // Variable CSS con el color de la categoría (la define applyBranding en :root)
 const colorCat = (p) => (p.categoria?.slug ? `style="--cat-color:var(--cat-${esc(p.categoria.slug)}, var(--color-line))"` : '');
 
-export function cardHTML(p) {
+// `nivel`: h3 cuando la tarjeta está bajo un h2 (home); h2 en el catálogo, donde el título de la página es el h1
+export function cardHTML(p, nivel = 'h3') {
   const agotado = estaAgotado(p);
   const badges = [
     agotado ? '<span class="badge badge-danger">Sin stock</span>' : '',
@@ -44,7 +45,7 @@ export function cardHTML(p) {
         <span class="card-badges">${badges}</span>
       </a>
       <div class="card-body">
-        <h3 class="card-title">${esc(p.nombre)}</h3>
+        <${nivel} class="card-title">${esc(p.nombre)}</${nivel}>
         <span class="card-price">${money(p.precio)}</span>
         ${boton}
       </div>

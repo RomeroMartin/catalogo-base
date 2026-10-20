@@ -51,11 +51,11 @@ export function initLayout() {
           ${link('index.html', 'Inicio', 'home')}${link('catalogo.html', 'Catálogo', 'catalogo')}${link('index.html#contacto', 'Contacto', 'contacto')}
         </nav>
       </header>
-      <aside class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Carrito" tabindex="-1">
+      <div class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Carrito" tabindex="-1">
         <div class="drawer-head"><h2 style="font-size:1.25rem">Tu carrito</h2><button class="icon-btn" type="button" data-cerrar-carrito aria-label="Cerrar carrito"><span aria-hidden="true">✕</span></button></div>
         <div class="drawer-body" id="cart-body"><p class="muted">Tu carrito está vacío.</p></div>
         <div class="drawer-foot" id="cart-foot"></div>
-      </aside>`;
+      </div>`;
   }
 
   const footer = $('#app-footer');

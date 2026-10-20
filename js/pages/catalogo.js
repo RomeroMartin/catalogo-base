@@ -51,7 +51,7 @@ function pintarChips() {
 function pintarGrilla() {
   const lista = visibles();
   grilla.innerHTML = lista.length
-    ? lista.map(cardHTML).join('')
+    ? lista.map((p) => cardHTML(p, 'h2')).join('')
     : `<div class="empty" style="grid-column:1/-1"><span class="emoji" aria-hidden="true">🔍</span>No encontramos productos con esa búsqueda.</div>`;
 }
 
