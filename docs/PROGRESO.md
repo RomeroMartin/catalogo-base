@@ -28,3 +28,5 @@ Estados: ⬜ pendiente · 🟨 en curso · ✅ hecha y verificada por Martin.
 - Pegar el plan completo en el repo ya está hecho en `docs/PLAN.md`; el repo no tenía README ni commits previos.
 - La clave publishable de Supabase la tiene Martin; se escribe en `js/site.config.js` en la Fase 3 (pública por diseño, no va en este archivo).
 - Siguiente: **Fase 6 (carrito y pedidos)**. Martin pausó la sesión después de la Parada 5. Acuerdo: Claude mergea los PR a `main` al cerrar cada fase y Martin prueba en Cloudflare.
+- Corregido (hallado por Martin en la prueba cruzada de la Fase 7): el carrito de una cuenta podía verse al entrar con otra cuenta en el mismo navegador. Ahora el carrito guardado tiene dueño (`cb_cart_v1_owner`): el de otra cuenta se descarta y solo el de invitado se fusiona.
+- Nota: la caché de categorías/config del sitio dura 5 min por pestaña (sessionStorage). Si molesta al editar desde el panel, bajarla a 1 min en `js/lib/store.js` (CACHE_MS).

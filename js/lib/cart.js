@@ -8,6 +8,7 @@ import { getProductosPorIds } from './api.js';
 
 const KEY = SITE.carritoKey;
 const KEY_T = `${KEY}_t`;                 // cuándo se modificó por última vez (para elegir el más nuevo)
+const OWNER = `${KEY}_owner`;            // de quién es el carrito guardado (vacío = invitado)
 const MERGED = (uid) => `${KEY}_merged_${uid}`; // marca: este usuario ya fusionó su carrito en este navegador
 const MAX_LINEA = 99;
 
@@ -25,11 +26,13 @@ function leer() {
 }
 
 let remotoPausado = false; // evita devolver a la base lo que justo vino de la base
+let usuarioId = null;      // usuario logueado cuyo carrito se está sincronizando
 
 function guardar(items, { remoto = true } = {}) {
   try {
     localStorage.setItem(KEY, JSON.stringify(items));
     localStorage.setItem(KEY_T, String(Date.now()));
+    if (usuarioId) localStorage.setItem(OWNER, usuarioId); else localStorage.removeItem(OWNER);
   } catch { /* sin almacenamiento: el carrito vive solo en esta página */ }
   document.dispatchEvent(new CustomEvent('cart:changed'));
   if (remoto && !remotoPausado) programarGuardadoRemoto();
@@ -94,7 +97,6 @@ export async function rehidratar() {
 }
 
 // ── Sincronización con la cuenta (tabla carritos) ──
-let usuarioId = null;
 let timer = null;
 
 function programarGuardadoRemoto() {
@@ -121,15 +123,22 @@ function fusionar(a, b) {
 }
 
 async function sincronizarAlIngresar(uid) {
+  // Se lee el dueño ANTES de asignar usuarioId (guardar() lo pisa con el usuario actual)
+  const duenio = localStorage.getItem(OWNER);
   usuarioId = uid;
   const { data, error } = await supabase.from('carritos').select('items,actualizado').eq('cliente_id', uid).maybeSingle();
   if (error) { console.error('No se pudo leer el carrito de la cuenta', error); return; }
   const remoto = Array.isArray(data?.items) ? data.items : [];
-  const local = leer();
+
+  // Si el carrito guardado en este navegador es de OTRA cuenta, no es de este usuario: se descarta
+  // (no se mezcla). Solo un carrito de invitado (sin dueño) se fusiona con el de la cuenta.
+  const ajeno = !!duenio && duenio !== uid;
+  const local = ajeno ? [] : leer();
 
   let final;
-  if (!localStorage.getItem(MERGED(uid))) {
-    // Primer ingreso en este navegador: se suman invitado + cuenta (una sola vez)
+  const traeInvitado = !duenio && local.length > 0; // cosas agregadas como invitado: siempre se suman a las de la cuenta
+  if (ajeno || traeInvitado || !localStorage.getItem(MERGED(uid))) {
+    // Primer ingreso en este navegador (o carrito de invitado): se suman invitado + cuenta, una sola vez
     final = fusionar(local, remoto);
     try { localStorage.setItem(MERGED(uid), '1'); } catch { /* ignorar */ }
   } else {
@@ -149,6 +158,13 @@ export function initCartSync() {
   onAuth((evento, sesion) => {
     if (sesion && (evento === 'INITIAL_SESSION' || evento === 'SIGNED_IN')) {
       if (usuarioId !== sesion.user.id) sincronizarAlIngresar(sesion.user.id);
+    } else if (evento === 'INITIAL_SESSION' && !sesion && localStorage.getItem(OWNER)) {
+      // Hay un carrito de una cuenta, pero ya no hay sesión (venció o se cerró sin avisar a esta pestaña):
+      // no se le muestra a un invitado. El de la cuenta queda guardado en la base.
+      usuarioId = null;
+      remotoPausado = true;
+      guardar([], { remoto: false });
+      remotoPausado = false;
     } else if (evento === 'SIGNED_OUT') {
       // Cerrar sesión vacía la vista local; el carrito remoto queda guardado.
       // (INITIAL_SESSION sin usuario es un invitado: NO se vacía.)
