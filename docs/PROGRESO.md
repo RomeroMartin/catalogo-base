@@ -4,8 +4,8 @@
 |---|---|---|---|
 | 0 Preparación | ✅ | 2026-10-20 | Martin confirmó repo, Supabase y red |
 | 1 Base de datos | ✅ | 2026-10-20 | Tests RLS 36/36 OK en Supabase real; admin creado |
-| 2 Diseño visual | 🟨 en curso | 2026-10-20 | CSS y styleguide hechos; falta aprobación de Martin (Parada 2). Ajustes vs plan: --color-whatsapp #1A7F44 (contraste AA con texto blanco), --color-muted #6B625B, nuevo --color-warning |
-| 3 Esqueleto y capa de datos | ⬜ pendiente | | |
+| 2 Diseño visual | ✅ | 2026-10-20 | CSS y styleguide hechos; falta aprobación de Martin (Parada 2). Ajustes vs plan: --color-whatsapp #1A7F44 (contraste AA con texto blanco), --color-muted #6B625B, nuevo --color-warning |
+| 3 Esqueleto y capa de datos | 🟨 en curso | 2026-10-20 | Código listo y probado con Supabase simulado; falta deploy en Cloudflare y prueba real (Parada 3). supabase-js fijado en 2.117.2 |
 | 4 Autenticación | ⬜ pendiente | | |
 | 5 Home y catálogo | ⬜ pendiente | | |
 | 6 Carrito y pedidos | ⬜ pendiente | | |
