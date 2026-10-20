@@ -10,8 +10,8 @@
 | 5 Home y catálogo | ✅ | 2026-10-20 | Verificada por Martin. El botón Agregar es provisorio (aviso) hasta la Fase 6 |
 | 6 Carrito y pedidos | ✅ | 2026-10-20 | Verificada por Martin, incluida la carrera de stock (el sitio ajusta cantidades y avisa; el servidor rechaza si hace falta) |
 | 7 Cuenta del cliente | ✅ | 2026-10-20 | Verificada por Martin (incluye prueba cruzada entre usuarios) |
-| 8 Panel de administración | 🟨 en curso | 2026-10-20 | 7 pestañas listas y probadas con Supabase simulado; falta prueba real de Martin (Parada 8), incluida iPhone. Las fotos se cargan en la Fase 9 (el formulario conserva las existentes) |
-| 9 Subir foto | ⬜ pendiente | | |
+| 8 Panel de administración | ✅ | 2026-10-20 | Verificada por Martin |
+| 9 Subir foto | 🟨 en curso | 2026-10-20 | image-upload.js + gestor de fotos en el formulario de producto; probado en Chromium con Storage simulado; falta prueba real de Martin desde PC, Android e iPhone (Parada 9) |
 | 10 Plantillización y docs | ⬜ pendiente | | |
 | 11 Seguridad final y publicación | ⬜ pendiente | | |
 

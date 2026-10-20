@@ -32,3 +32,6 @@
 .photo .photo-tools { display: flex; justify-content: space-between; padding: var(--space-1); }
 .dropzone { display: grid; place-items: center; min-height: 110px; padding: var(--space-4); text-align: center; border: 2px dashed var(--color-line); border-radius: var(--radius); color: var(--color-muted); cursor: pointer; }
 .dropzone:hover, .dropzone.is-over { border-color: var(--color-primary); color: var(--color-ink); }
+
+.dropzone:focus-within { border-color: var(--color-accent); color: var(--color-ink); }
+.photo .photo-tools .btn { min-width: 32px; padding: 0 var(--space-2); }
