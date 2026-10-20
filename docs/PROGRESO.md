@@ -8,8 +8,8 @@
 | 3 Esqueleto y capa de datos | ✅ | 2026-10-20 | Desplegado en Cloudflare Pages; Martin verificó. CSP: se agregó cdn.jsdelivr.net a connect-src (sourcemaps) |
 | 4 Autenticación | ✅ | 2026-10-20 | Verificada por Martin en Cloudflare |
 | 5 Home y catálogo | ✅ | 2026-10-20 | Verificada por Martin. El botón Agregar es provisorio (aviso) hasta la Fase 6 |
-| 6 Carrito y pedidos | 🟨 en curso | 2026-10-20 | cart.js, cart-ui.js, checkout.js listos y probados con Supabase simulado; falta prueba real de Martin (Parada 6), incluida la apertura de WhatsApp en iPhone |
-| 7 Cuenta del cliente | ⬜ pendiente | | |
+| 6 Carrito y pedidos | ✅ | 2026-10-20 | Verificada por Martin, incluida la carrera de stock (el sitio ajusta cantidades y avisa; el servidor rechaza si hace falta) |
+| 7 Cuenta del cliente | 🟨 en curso | 2026-10-20 | Mis datos, Mis pedidos y Repetir pedido; falta prueba real de Martin (Parada 7) |
 | 8 Panel de administración | ⬜ pendiente | | |
 | 9 Subir foto | ⬜ pendiente | | |
 | 10 Plantillización y docs | ⬜ pendiente | | |
