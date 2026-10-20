@@ -1,0 +1,5 @@
+# CLIENTE: cambiar el dominio del sitemap
+User-agent: *
+Allow: /
+Disallow: /admin/
+Sitemap: https://catalogo-base.pages.dev/sitemap.xml

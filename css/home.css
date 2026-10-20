@@ -1,0 +1,21 @@
+/* ============================================================
+   home.css — hero, categorías, destacados, secciones de texto
+   ============================================================ */
+.hero { padding-block: var(--space-7) var(--space-8); }
+.hero .container { display: grid; gap: var(--space-5); max-width: 760px; margin-inline: auto; text-align: center; justify-items: center; }
+.hero p { font-size: 1.15rem; color: var(--color-muted); max-width: 54ch; }
+.hero .row { justify-content: center; }
+@media (min-width: 768px) { .hero .container { text-align: left; justify-items: start; margin-inline: auto calc(50% - var(--container) / 2); } .hero .row { justify-content: flex-start; } }
+
+.section-head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-4); margin-bottom: var(--space-5); flex-wrap: wrap; }
+
+.cat-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 768px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
+.cat-card { display: flex; flex-direction: column; gap: var(--space-2); justify-content: flex-end; min-height: 140px; padding: var(--space-4); border-radius: var(--radius); background: color-mix(in srgb, var(--cat-color, var(--color-line)) 60%, var(--color-surface)); color: var(--color-ink); text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; transition: transform .2s, box-shadow .2s; }
+.cat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(--color-ink); }
+.cat-card .emoji { font-size: 2rem; }
+
+.about { display: grid; gap: var(--space-4); max-width: 68ch; }
+.contact-grid { display: grid; gap: var(--space-5); }
+@media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+.contact-list { list-style: none; padding: 0; display: grid; gap: var(--space-3); }

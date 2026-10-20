@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Styleguide — catalogo-base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/catalogo.css">
+  <link rel="stylesheet" href="../css/cuenta.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <style>
+    /* Solo para esta página: muestra modal, drawer y toasts "en línea" para poder verlos sin JS */
+    .sg h2 { margin: var(--space-7) 0 var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-line); }
+    .sg .demo .modal, .sg .demo .drawer { position: static; transform: none; visibility: visible; opacity: 1; width: min(100%, 440px); max-height: none; border: 1px solid var(--color-line); border-radius: var(--radius-lg); }
+    .sg .demo .toasts { position: static; transform: none; width: min(100%, 420px); }
+    .swatches { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .swatch { border: 1px solid var(--color-line); border-radius: var(--radius-sm); overflow: hidden; font-size: .8rem; background: var(--color-surface); }
+    .swatch i { display: block; height: 56px; }
+    .swatch span { display: block; padding: var(--space-2); }
+  </style>
+</head>
+<body class="sg">
+  <!-- Header de ejemplo (el real lo inyecta js/components/layout.js) -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#">Casa Nube</a>
+      <nav class="nav" aria-label="Principal"><a href="#" aria-current="page">Inicio</a><a href="#">Catálogo</a><a href="#">Contacto</a></nav>
+      <div class="header-actions">
+        <a class="icon-btn" href="#">👤 <span class="sr-only">Ingresar</span></a>
+        <button class="icon-btn" type="button" aria-label="Carrito">🛒<span class="cart-count" aria-live="polite">3</span></button>
+        <button class="icon-btn menu-toggle" type="button" aria-label="Menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 style="margin-top: var(--space-6)">Styleguide</h1>
+    <p class="muted">Muestra de todos los componentes con los tokens de <code>css/theme.css</code>. Tipografías: Fraunces (títulos) + Inter (texto).</p>
+
+    <h2>Colores</h2>
+    <div class="swatches">
+      <div class="swatch"><i style="background:var(--color-bg)"></i><span>bg</span></div>
+      <div class="swatch"><i style="background:var(--color-surface)"></i><span>surface</span></div>
+      <div class="swatch"><i style="background:var(--color-ink)"></i><span>ink</span></div>
+      <div class="swatch"><i style="background:var(--color-muted)"></i><span>muted</span></div>
+      <div class="swatch"><i style="background:var(--color-line)"></i><span>line</span></div>
+      <div class="swatch"><i style="background:var(--color-primary)"></i><span>primary</span></div>
+      <div class="swatch"><i style="background:var(--color-accent)"></i><span>accent</span></div>
+      <div class="swatch"><i style="background:var(--color-warning)"></i><span>warning</span></div>
+      <div class="swatch"><i style="background:var(--color-danger)"></i><span>danger</span></div>
+      <div class="swatch"><i style="background:var(--color-whatsapp)"></i><span>whatsapp</span></div>
+    </div>
+
+    <h2>Tipografía</h2>
+    <div class="stack">
+      <h1>Título 1 — Casa Nube</h1>
+      <h2 style="margin:0;padding:0;border:0">Título 2 — Objetos para tu casa</h2>
+      <h3>Título 3 — Velas y aromas</h3>
+      <p>Texto de párrafo. Hecho a mano en pequeñas tandas, con materiales nobles y mucho cariño. <a href="#">Un enlace de ejemplo</a>.</p>
+      <p class="muted">Texto secundario para aclaraciones y detalles.</p>
+    </div>
+
+    <h2>Botones</h2>
+    <div class="row">
+      <button class="btn btn-primary">Principal</button>
+      <button class="btn">Secundario</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-whatsapp">Pedir por WhatsApp</button>
+      <button class="btn btn-danger">Eliminar</button>
+      <button class="btn btn-primary" disabled>Deshabilitado</button>
+      <button class="btn btn-primary is-loading">Cargando</button>
+      <button class="btn btn-primary btn-sm">Pequeño</button>
+      <button class="btn btn-primary btn-lg">Grande</button>
+    </div>
+
+    <h2>Formularios</h2>
+    <form class="stack" style="max-width:440px" onsubmit="return false">
+      <div class="field"><label for="f1">Nombre</label><input id="f1" class="input" placeholder="Tu nombre"></div>
+      <div class="field has-error"><label for="f2">Email</label><input id="f2" class="input" value="no-es-un-email"><span class="field-error">Ingresá un email válido.</span></div>
+      <div class="field"><label for="f3">Entrega</label><select id="f3" class="select"><option>Envío a domicilio</option><option>Retiro por el local</option></select><span class="field-hint">Te confirmamos el costo por WhatsApp.</span></div>
+      <div class="field"><label for="f4">Notas</label><textarea id="f4" class="textarea"></textarea></div>
+      <label class="check"><input type="checkbox" checked> Guardar mi dirección</label>
+      <div class="form-error">Mensaje de error del formulario.</div>
+      <div class="form-ok">Guardado correctamente.</div>
+    </form>
+
+    <h2>Chips y badges</h2>
+    <div class="chips" role="group" aria-label="Categorías">
+      <button class="chip" aria-pressed="true">Todas</button>
+      <button class="chip" aria-pressed="false">🕯️ Velas</button>
+      <button class="chip" aria-pressed="false">🏠 Hogar</button>
+      <button class="chip is-disabled" disabled>Terracota · Sin stock</button>
+    </div>
+    <div class="row" style="margin-top:var(--space-3)">
+      <span class="badge">Neutro</span><span class="badge badge-primary">+ modelos</span>
+      <span class="badge badge-warn">Pendiente</span><span class="badge badge-ok">Confirmado</span>
+      <span class="badge badge-ok">Entregado</span><span class="badge badge-danger">Cancelado</span>
+    </div>
+
+    <h2>Tarjeta de producto</h2>
+    <div class="grid" style="--cat-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-surface))">
+      <article class="card"><button class="card-media" aria-label="Ver Vela de soja">🕯️<span class="card-badges"><span class="badge badge-primary">+ modelos</span></span></button>
+        <div class="card-body"><h3 class="card-title">Vela de soja</h3><span class="card-price">$ 8.500</span><button class="btn btn-primary btn-sm">Ver modelos</button></div></article>
+      <article class="card"><button class="card-media" aria-label="Ver Taza">☕</button>
+        <div class="card-body"><h3 class="card-title">Taza de cerámica</h3><span class="card-price">$ 12.900</span><button class="btn btn-primary btn-sm">Agregar</button></div></article>
+      <article class="card is-soldout"><button class="card-media" aria-label="Ver Bandeja">🍽️<span class="card-badges"><span class="badge badge-danger">Sin stock</span></span></button>
+        <div class="card-body"><h3 class="card-title">Bandeja de madera</h3><span class="card-price">$ 15.000</span><button class="btn btn-sm" disabled>Sin stock</button></div></article>
+      <div class="card"><div class="card-media skeleton"></div><div class="card-body"><div class="skeleton" style="height:16px"></div><div class="skeleton" style="height:16px;width:50%"></div></div></div>
+    </div>
+
+    <h2>Modal de producto</h2>
+    <div class="demo">
+      <div class="modal is-open" role="dialog" aria-label="Ejemplo">
+        <div class="modal-head"><h3>Funda de almohadón</h3><button class="icon-btn" aria-label="Cerrar">✕</button></div>
+        <div class="modal-body stack">
+          <p class="card-price">$ 9.800</p>
+          <p class="muted">Lino lavado, 50×50 cm. Elegí un modelo:</p>
+          <div class="chips"><button class="chip" aria-pressed="true">Arena</button><button class="chip is-disabled" disabled>Terracota · Sin stock</button><button class="chip" aria-pressed="false">Verde</button></div>
+          <p class="stock-low">¡Quedan 2!</p>
+        </div>
+        <div class="modal-foot"><button class="btn btn-primary">Agregar al carrito</button></div>
+      </div>
+    </div>
+
+    <h2>Drawer del carrito</h2>
+    <div class="demo">
+      <aside class="drawer is-open" aria-label="Carrito">
+        <div class="drawer-head"><h3>Tu carrito</h3><button class="icon-btn" aria-label="Cerrar">✕</button></div>
+        <div class="drawer-body">
+          <div class="cart-line"><div class="thumb">🕯️</div><div><div class="name">Vela de soja</div><div class="variant">Lavanda</div><div class="qty"><button aria-label="Menos">−</button><output>2</output><button aria-label="Más">+</button></div></div><strong>$ 17.000</strong></div>
+          <div class="cart-line"><div class="thumb">☕</div><div><div class="name">Taza de cerámica</div><div class="qty"><button aria-label="Menos">−</button><output>1</output><button aria-label="Más">+</button></div></div><strong>$ 12.900</strong></div>
+        </div>
+        <div class="drawer-foot"><div class="cart-total"><span>Total</span><span>$ 29.900</span></div><button class="btn btn-primary btn-block">Confirmar pedido</button></div>
+      </aside>
+    </div>
+
+    <h2>Toasts</h2>
+    <div class="demo"><div class="toasts" aria-live="polite">
+      <div class="toast">Producto agregado al carrito</div>
+      <div class="toast toast-ok">Pedido enviado</div>
+      <div class="toast toast-error">No pudimos guardar los cambios</div>
+    </div></div>
+
+    <h2>Tabla</h2>
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>Código</th><th>Cliente</th><th>Estado</th><th class="num">Total</th></tr></thead>
+      <tbody>
+        <tr><td>CN-00003</td><td>Lucía Pérez</td><td><span class="badge badge-warn">Pendiente</span></td><td class="num">$ 29.900</td></tr>
+        <tr><td>CN-00002</td><td>Mateo Gómez</td><td><span class="badge badge-ok">Entregado</span></td><td class="num">$ 12.900</td></tr>
+        <tr><td>CN-00001</td><td>Sofía Díaz</td><td><span class="badge badge-danger">Cancelado</span></td><td class="num">$ 8.500</td></tr>
+      </tbody></table></div>
+
+    <h2>Panel: estadísticas y stock</h2>
+    <div class="stats">
+      <div class="stat"><div class="muted">Ventas del mes</div><div class="n">$ 184.500</div></div>
+      <div class="stat"><div class="muted">Pendientes</div><div class="n">4</div></div>
+      <div class="stat"><div class="muted">Productos</div><div class="n">12</div></div>
+      <div class="stat"><div class="muted">Sin stock</div><div class="n stock-0">1</div></div>
+    </div>
+    <div class="bars" style="margin-top:var(--space-4)" role="img" aria-label="Ventas de los últimos 6 meses">
+      <div class="bar"><i style="height:40%"></i>May</div><div class="bar"><i style="height:55%"></i>Jun</div><div class="bar"><i style="height:35%"></i>Jul</div>
+      <div class="bar"><i style="height:70%"></i>Ago</div><div class="bar"><i style="height:60%"></i>Sep</div><div class="bar"><i style="height:90%"></i>Oct</div>
+    </div>
+
+    <h2>Estado vacío</h2>
+    <div class="empty"><span class="emoji">🔍</span>No encontramos productos con esa búsqueda.<br><button class="btn" style="margin-top:var(--space-3)">Reintentar</button></div>
+  </main>
+
+  <footer class="site-footer"><div class="container"><span>© 2026 Casa Nube</span><span>Sitio por Martin Romero Studio</span></div></footer>
+</body>
+</html>

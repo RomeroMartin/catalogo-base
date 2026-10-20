@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es-AR" data-root="" data-page="home">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tienda</title>
+  <!-- CLIENTE: título y descripción para buscadores (el título se completa solo con el nombre de la tienda) -->
+  <meta name="description" content="Catálogo online con pedidos por WhatsApp.">
+  <meta name="theme-color" content="#FBF8F4">
+  <!-- CLIENTE: datos para compartir en redes (cambiar dominio e imagen) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Casa Nube — objetos para tu casa">
+  <meta property="og:description" content="Catálogo online con pedidos por WhatsApp.">
+  <meta property="og:image" content="https://catalogo-base.pages.dev/assets/og-image.png">
+  <meta property="og:locale" content="es_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/catalogo.css">
+  <!-- CLIENTE: datos estructurados (JSON-LD) para Google; cambiar nombre, url y teléfono -->
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "Store", "name": "Casa Nube", "url": "https://catalogo-base.pages.dev/", "image": "https://catalogo-base.pages.dev/assets/og-image.png" }
+  </script>
+</head>
+<body>
+  <a class="sr-only" href="#contenido">Saltar al contenido</a>
+  <div id="app-header"></div>
+  <main id="contenido">
+    <section class="hero">
+      <div class="container">
+        <h1 data-config="hero_titulo">&nbsp;</h1>
+        <p data-config="hero_texto"></p>
+        <div class="row">
+          <a class="btn btn-primary btn-lg" href="catalogo.html">Ver catálogo</a>
+          <a class="btn btn-whatsapp btn-lg" data-config="whatsapp-link" href="#" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-categorias">
+      <div class="container">
+        <div class="section-head"><h2 id="t-categorias">Categorías</h2></div>
+        <div class="cat-grid" id="categorias"></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-destacados">
+      <div class="container">
+        <div class="section-head"><h2 id="t-destacados">Destacados</h2><a href="catalogo.html">Ver todo</a></div>
+        <div class="grid" id="destacados"></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-sobre">
+      <div class="container about">
+        <h2 id="t-sobre" data-config="sobre_titulo"></h2>
+        <p data-config="sobre_texto"></p>
+      </div>
+    </section>
+
+    <section class="section" id="contacto" aria-labelledby="t-contacto">
+      <div class="container contact-grid">
+        <div class="stack">
+          <h2 id="t-contacto">Envíos y contacto</h2>
+          <p data-config="envio_texto"></p>
+          <ul class="contact-list">
+            <li><a data-config="whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a data-config="instagram-link" href="#" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a data-config="email-link" href="#"><span data-config="email"></span></a></li>
+          </ul>
+        </div>
+        <!-- El formulario de contacto (Formspree) lo agrega home.js solo si SITE.formspreeId no está vacío -->
+        <div id="contacto-form"></div>
+      </div>
+    </section>
+  </main>
+  <div id="app-footer"></div>
+  <script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

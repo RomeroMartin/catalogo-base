@@ -1,0 +1,37 @@
+/* ============================================================
+   theme.css — ÚNICO archivo de colores y tipografías por cliente.
+   Para un cliente nuevo, se cambian solo estos valores.
+   Regla: ningún color, fuente ni sombra va hardcodeado en otro CSS
+   (excepto los colores de categoría, que vienen de la base).
+   ============================================================ */
+:root {
+  /* Color */
+  --color-bg:        #FBF8F4;   /* fondo general (crema) */
+  --color-surface:   #FFFFFF;   /* tarjetas, modales */
+  --color-ink:       #2B2623;   /* texto principal */
+  --color-muted:     #6B625B;   /* texto secundario (AA sobre crema) */
+  --color-line:      #E8E1D9;   /* bordes y divisores */
+  --color-primary:   #B8553B;   /* botón principal (terracota) */
+  --color-primary-ink:#FFFFFF;  /* texto sobre primary */
+  --color-primary-hover:#9C452F;
+  --color-accent:    #3F6B5E;   /* detalles, "disponible", éxito (verde salvia) */
+  --color-warning:   #8A5A00;   /* stock bajo (ámbar oscuro, legible) */
+  --color-danger:    #B3261E;
+  --color-whatsapp:  #1A7F44;   /* botón de WhatsApp (oscurecido para contraste AA con texto blanco) */
+  --color-whatsapp-hover:#146637;
+  --color-overlay:   rgba(43,38,35,.5);
+
+  /* Tipografía (se cargan desde Google Fonts en el <head> de cada HTML) */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Escala */
+  --radius-sm: 8px; --radius: 14px; --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(43,38,35,.06);
+  --shadow:    0 6px 24px rgba(43,38,35,.10);
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+  --space-5:24px; --space-6:32px; --space-7:48px; --space-8:72px;
+  --container: 1120px;
+  --header-h: 64px;
+  --tap: 44px;                  /* alto mínimo de elementos táctiles */
+}
