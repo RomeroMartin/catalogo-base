@@ -51,7 +51,8 @@ function overlay() {
   return ov;
 }
 
-export function abrirModal(el) {
+// opciones.onClose se llama cada vez que el modal se cierra (botón, Esc o clic afuera).
+export function abrirModal(el, opciones = {}) {
   if (abiertos.some((m) => m.el === el)) return;
   const opener = document.activeElement;
   const onKey = (ev) => {
@@ -64,7 +65,7 @@ export function abrirModal(el) {
     if (ev.shiftKey && document.activeElement === primero) { ev.preventDefault(); ultimo.focus(); }
     else if (!ev.shiftKey && document.activeElement === ultimo) { ev.preventDefault(); primero.focus(); }
   };
-  abiertos.push({ el, opener, onKey });
+  abiertos.push({ el, opener, onKey, onClose: opciones.onClose });
   document.addEventListener('keydown', onKey);
   overlay().classList.add('is-open');
   document.body.classList.add('no-scroll');
@@ -79,7 +80,7 @@ export function abrirModal(el) {
 export function cerrarModal(el) {
   const i = abiertos.findIndex((m) => m.el === el);
   if (i === -1) return;
-  const [{ opener, onKey }] = abiertos.splice(i, 1);
+  const [{ opener, onKey, onClose }] = abiertos.splice(i, 1);
   document.removeEventListener('keydown', onKey);
   el.classList.remove('is-open');
   if (!abiertos.length) {
@@ -87,4 +88,5 @@ export function cerrarModal(el) {
     document.body.classList.remove('no-scroll');
   }
   if (opener && typeof opener.focus === 'function') opener.focus();
+  if (onClose) onClose();
 }
