@@ -43,7 +43,7 @@ Marcá cada casilla a medida que avanzás.
 
 ## 6. Personalizar el código (en el repo nuevo)
 - [ ] `js/site.config.js`: `supabaseUrl`, `supabaseAnonKey` y, si usa formulario de contacto, `formspreeId`. Revisá `credito` (el texto del pie; dejalo vacío si no corresponde) y `carritoKey` (podés dejarla).
-- [ ] `css/theme.css`: colores y tipografías del cliente. Si cambiás las tipografías, actualizá también el enlace de Google Fonts en el `<head>` de `index.html`, `catalogo.html`, `cuenta.html` y `admin/index.html` (están marcados con `<!-- CLIENTE -->`). Mantené el contraste suficiente entre texto y fondo.
+- [ ] `css/theme.css`: colores y tipografías del cliente. Las tipografías están **autoalojadas** (`assets/fonts/*.woff2`, subconjunto latino): para cambiarlas, reemplazá los archivos, ajustá los `@font-face` y las variables `--font-*` de `theme.css`, y actualizá los `<link rel="preload">` de `index.html`, `catalogo.html`, `cuenta.html` y `admin/index.html` (están marcados con `<!-- CLIENTE -->`). Si preferís Google Fonts, agregá su `<link>` a los 4 HTML y sumá `https://fonts.googleapis.com` a `style-src` y `https://fonts.gstatic.com` a `font-src` en `_headers`. Mantené el contraste suficiente entre texto y fondo.
 - [ ] `assets/`: reemplazá `favicon.svg` y `og-image.png` (imagen para compartir, 1200×630).
 - [ ] Buscá `CLIENTE` en todo el proyecto y resolvé cada marca. En general:
   - Metas SEO, `og:title`, `og:image`, JSON-LD (nombre, dirección, teléfono) y `theme-color` en los 4 HTML (`theme-color` = `--color-bg`).

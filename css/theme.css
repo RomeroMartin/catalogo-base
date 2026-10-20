@@ -4,6 +4,22 @@
    Regla: ningún color, fuente ni sombra va hardcodeado en otro CSS
    (excepto los colores de categoría, que vienen de la base).
    ============================================================ */
+/* ── Tipografías autoalojadas (sin pedir nada a Google: más rápido y sin conexiones extra) ──
+   Los archivos están en assets/fonts/ (licencia OFL). Para cambiar de tipografía: reemplazá los
+   archivos .woff2, ajustá estos @font-face y las variables --font-* de abajo, y actualizá los
+   <link rel="preload"> de los 4 HTML (están marcados con CLIENTE). Solo se incluye el subconjunto
+   "latin" (cubre español: tildes, ñ, ¿ ¡). */
+@font-face {
+  font-family: 'Fraunces'; font-style: normal; font-weight: 600 700; font-display: swap;
+  src: url('../assets/fonts/fraunces-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('../assets/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   /* Color */
   --color-bg:        #FBF8F4;   /* fondo general (crema) */

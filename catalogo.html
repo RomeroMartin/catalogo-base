@@ -16,15 +16,28 @@
   <meta property="og:locale" content="es_AR">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <!-- CLIENTE: si cambiás las tipografías en css/theme.css, cambiá también el enlace de Google Fonts de abajo -->
   <!-- CLIENTE: preconexión al proyecto de Supabase (mismo dominio que supabaseUrl en js/site.config.js) -->
   <link rel="preconnect" href="https://pnxplpmyeozclhhpjfsq.supabase.co" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <!-- Precarga del cliente de Supabase: si cambiás la versión en js/supabase-client.js, cambiala también acá -->
   <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/+esm">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Precarga de los módulos JS de esta página (se bajan en paralelo en vez de en cadena) -->
+  <link rel="modulepreload" href="js/pages/catalogo.js">
+  <link rel="modulepreload" href="js/lib/image-url.js">
+  <link rel="modulepreload" href="js/supabase-client.js">
+  <link rel="modulepreload" href="js/site.config.js">
+  <link rel="modulepreload" href="js/lib/format.js">
+  <link rel="modulepreload" href="js/lib/dom.js">
+  <link rel="modulepreload" href="js/lib/cart.js">
+  <link rel="modulepreload" href="js/lib/api.js">
+  <link rel="modulepreload" href="js/lib/auth.js">
+  <link rel="modulepreload" href="js/lib/store.js">
+  <link rel="modulepreload" href="js/components/producto-card.js">
+  <link rel="modulepreload" href="js/components/layout.js">
+  <link rel="modulepreload" href="js/components/cart-ui.js">
+  <!-- CLIENTE: precarga de las tipografías de css/theme.css (cambiar si cambian los archivos) -->
+  <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">

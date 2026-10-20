@@ -88,3 +88,7 @@ body.no-scroll { overflow: hidden; }
   .brand { font-size: 1.15rem; line-height: 1.1; }
   .header-actions .icon-btn { padding: 0 var(--space-1); font-size: .9rem; }
 }
+
+/* Reserva el alto del header y de la fila de categorías antes de que el JS los dibuje (evita saltos de diseño) */
+#app-header { display: block; min-height: calc(var(--header-h) + 1px); }
+#chips { min-height: calc(var(--tap) + var(--space-2)); }
