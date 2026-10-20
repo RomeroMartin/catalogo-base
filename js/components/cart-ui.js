@@ -3,7 +3,6 @@ import { $, esc, on } from '../lib/dom.js';
 import { money } from '../lib/format.js';
 import { mediaHTML, emojiSiFalla } from './producto-card.js';
 import { rehidratar, cambiarQty, quitar } from '../lib/cart.js';
-import { abrirCheckout } from '../lib/checkout.js';
 import { cerrarModal } from '../lib/dom.js';
 
 let pintando = 0; // número de pintado en curso: descarta respuestas viejas
@@ -72,7 +71,11 @@ export function initCartUI() {
     cambiarQty(clave, qty - 1);
   });
   on(drawer, 'click', '[data-quitar]', (_e, el) => quitar(el.closest('[data-clave]').dataset.clave));
-  on(drawer, 'click', '[data-confirmar]', () => { cerrarModal(drawer); abrirCheckout(); });
+  on(drawer, 'click', '[data-confirmar]', async () => {
+    cerrarModal(drawer);
+    const { abrirCheckout } = await import('../lib/checkout.js'); // se descarga recién ahora (carga inicial más liviana)
+    abrirCheckout();
+  });
 
   document.addEventListener('cart:open', () => { avisosAbiertos = []; pintarCarrito(); });
   document.addEventListener('cart:changed', () => { if (drawer.classList.contains('is-open')) pintarCarrito(); });

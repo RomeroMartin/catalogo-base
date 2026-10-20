@@ -47,6 +47,7 @@ Marcá cada casilla a medida que avanzás.
 - [ ] `assets/`: reemplazá `favicon.svg` y `og-image.png` (imagen para compartir, 1200×630).
 - [ ] Buscá `CLIENTE` en todo el proyecto y resolvé cada marca. En general:
   - Metas SEO, `og:title`, `og:image`, JSON-LD (nombre, dirección, teléfono) y `theme-color` en los 4 HTML (`theme-color` = `--color-bg`).
+  - La preconexión a Supabase (`<link rel="preconnect" href="https://<ref>.supabase.co">`) en los 4 HTML: poné la URL del proyecto del cliente.
   - `sitemap.xml` y `robots.txt`: poné el dominio real.
 - [ ] Probá en local (ver `README.md`): `python3 -m http.server 8080`.
 
