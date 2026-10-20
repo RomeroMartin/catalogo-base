@@ -5,10 +5,10 @@ import { imgUrl } from '../lib/image-url.js';
 import { estaAgotado } from '../lib/api.js';
 
 // Imagen de portada (miniatura) o, si no hay foto, el emoji del producto.
-export function mediaHTML(p, version = 'thumb', tam = 400) {
+export function mediaHTML(p, version = 'thumb', tam = 400, rapida = false) {
   const ruta = p.imagenes?.[0]?.[version];
   if (!ruta) return `<span aria-hidden="true">${esc(p.emoji || '🛍️')}</span>`;
-  return `<img src="${esc(imgUrl(ruta))}" alt="${esc(p.nombre)}" width="${tam}" height="${tam}" loading="lazy" decoding="async" data-emoji="${esc(p.emoji || '🛍️')}">`;
+  return `<img src="${esc(imgUrl(ruta))}" alt="${esc(p.nombre)}" width="${tam}" height="${tam}" ${rapida ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" data-emoji="${esc(p.emoji || '🛍️')}">`;
 }
 
 // Cuando una imagen falla (el evento "error" no burbujea: se escucha en captura) se muestra el emoji.
@@ -26,8 +26,9 @@ export function emojiSiFalla(contenedor) {
 // Variable CSS con el color de la categoría (la define applyBranding en :root)
 const colorCat = (p) => (p.categoria?.slug ? `style="--cat-color:var(--cat-${esc(p.categoria.slug)}, var(--color-line))"` : '');
 
+// `rapida`: fotos de la primera pantalla (sin carga diferida y con prioridad, para que el LCP sea rápido)
 // `nivel`: h3 cuando la tarjeta está bajo un h2 (home); h2 en el catálogo, donde el título de la página es el h1
-export function cardHTML(p, nivel = 'h3') {
+export function cardHTML(p, nivel = 'h3', rapida = false) {
   const agotado = estaAgotado(p);
   const badges = [
     agotado ? '<span class="badge badge-danger">Sin stock</span>' : '',
@@ -41,7 +42,7 @@ export function cardHTML(p, nivel = 'h3') {
   return `
     <article class="card${agotado ? ' is-soldout' : ''}" ${colorCat(p)}>
       <a class="card-media" href="catalogo.html?p=${esc(p.id)}" data-abrir="${esc(p.id)}" aria-label="Ver ${esc(p.nombre)}">
-        ${mediaHTML(p)}
+        ${mediaHTML(p, 'thumb', 400, rapida)}
         <span class="card-badges">${badges}</span>
       </a>
       <div class="card-body">
