@@ -2,7 +2,8 @@
 import { initLayout } from '../components/layout.js';
 import { cardHTML, mediaHTML, emojiSiFalla, skeletonCards } from '../components/producto-card.js';
 import { getStore, applyBranding } from '../lib/store.js';
-import { listProductos, normalizar, estaAgotado } from '../lib/api.js';
+import { listProductos, normalizar, estaAgotado, stockModelo } from '../lib/api.js';
+import { agregar as agregarAlCarrito } from '../lib/cart.js';
 import { $, $$, esc, on, toast, abrirModal, cerrarModal } from '../lib/dom.js';
 import { money } from '../lib/format.js';
 import { imgUrl } from '../lib/image-url.js';
@@ -125,11 +126,14 @@ function actualizarAviso(p) {
   btn.textContent = agotado ? 'Sin stock' : 'Agregar al carrito';
 }
 
-// El carrito real llega en la Fase 6. Esta función avisa con un evento para que cart.js lo escuche.
+// Agrega al carrito respetando el stock disponible
 function agregar(productoId, modeloId = null) {
-  const ev = new CustomEvent('cart:add', { detail: { producto_id: productoId, modelo_id: modeloId }, cancelable: true });
-  document.dispatchEvent(ev);
-  if (!ev.defaultPrevented) toast('El carrito se activa en la próxima etapa 🙂');
+  const p = productos.find((x) => x.id === productoId);
+  if (!p) return;
+  const stock = stockModelo(p, modeloId);
+  const r = agregarAlCarrito(productoId, modeloId, 1, stock);
+  if (r.ok) toast(`${p.nombre} agregado al carrito`, 'ok');
+  else toast(`Ya tenés todo el stock disponible (${stock}) en tu carrito`);
 }
 
 // ── Eventos (delegación, sin onclick inline) ──

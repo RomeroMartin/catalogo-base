@@ -4,10 +4,12 @@
 import { SITE } from '../site.config.js';
 import { $, on, abrirModal, cerrarModal } from '../lib/dom.js';
 import { onAuth, isAdmin } from '../lib/auth.js';
+import { initCartSync } from '../lib/cart.js';
+import { initCartUI } from './cart-ui.js';
 
 const raiz = document.documentElement.dataset.root || '';
 
-// Cantidad de unidades en el carrito (el carrito completo vive en cart.js, Fase 6).
+// Cantidad de unidades en el carrito (lee directo de localStorage para no cargar todo cart.js al pintar).
 function contarCarrito() {
   try {
     const items = JSON.parse(localStorage.getItem(SITE.carritoKey)) || [];
@@ -76,7 +78,7 @@ export function initLayout() {
     menuBtn.setAttribute('aria-expanded', String(abierto));
   });
 
-  // Carrito (la lógica real llega en la Fase 6; acá solo se abre y cierra)
+  // Carrito: abrir/cerrar el drawer (el contenido lo pinta cart-ui.js)
   const drawer = $('#cart-drawer');
   $('#cart-btn')?.addEventListener('click', () => {
     document.dispatchEvent(new CustomEvent('cart:open'));
@@ -84,6 +86,8 @@ export function initLayout() {
   });
   if (drawer) on(drawer, 'click', '[data-cerrar-carrito]', () => cerrarModal(drawer));
 
+  initCartUI();
+  initCartSync();
   pintarContador();
   document.addEventListener('cart:changed', pintarContador);
   window.addEventListener('storage', pintarContador);
