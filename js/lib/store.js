@@ -35,7 +35,7 @@ export async function getStore() {
 
 const soloDigitos = (s) => String(s ?? '').replace(/\D/g, '');
 
-// "@casanube" o "https://instagram.com/casanube/" → "casanube"
+// "@mitienda" o "https://instagram.com/mitienda/" → "mitienda"
 function usuarioInstagram(valor) {
   return String(valor ?? '').trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/^@/, '').replace(/\/.*$/, '');
 }

@@ -11,8 +11,8 @@
 | 6 Carrito y pedidos | ✅ | 2026-10-20 | Verificada por Martin, incluida la carrera de stock (el sitio ajusta cantidades y avisa; el servidor rechaza si hace falta) |
 | 7 Cuenta del cliente | ✅ | 2026-10-20 | Verificada por Martin (incluye prueba cruzada entre usuarios) |
 | 8 Panel de administración | ✅ | 2026-10-20 | Verificada por Martin |
-| 9 Subir foto | 🟨 en curso | 2026-10-20 | image-upload.js + gestor de fotos en el formulario de producto; probado en Chromium con Storage simulado; falta prueba real de Martin desde PC, Android e iPhone (Parada 9) |
-| 10 Plantillización y docs | ⬜ pendiente | | |
+| 9 Subir foto | ✅ | 2026-10-20 | Verificada por Martin (PC, Android, iPhone) |
+| 10 Plantillización y docs | 🟨 en curso | 2026-10-20 | Auditoría de hardcodeo hecha (sin hallazgos), marcas CLIENTE completas, README, MANUAL-ADMIN y SETUP-NUEVO-CLIENTE listos; falta que Martin lea el manual y marque el repo como plantilla (Parada 10) |
 | 11 Seguridad final y publicación | ⬜ pendiente | | |
 
 Estados: ⬜ pendiente · 🟨 en curso · ✅ hecha y verificada por Martin.
