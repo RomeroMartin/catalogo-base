@@ -81,3 +81,10 @@ body.no-scroll { overflow: hidden; }
 
 /* Un <form> dentro del modal: que el cuerpo haga scroll y el pie quede siempre visible */
 .modal > form { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+/* Header en pantallas chicas: que "Mi cuenta" y "Panel" no se partan en dos líneas */
+.icon-btn { white-space: nowrap; }
+@media (max-width: 480px) {
+  .brand { font-size: 1.15rem; line-height: 1.1; }
+  .header-actions .icon-btn { padding: 0 var(--space-1); font-size: .9rem; }
+}
