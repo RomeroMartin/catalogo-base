@@ -292,7 +292,7 @@ export async function render(el) {
     <div class="section-head"><h1 style="font-size:1.8rem">Productos</h1><button class="btn btn-primary" type="button" data-nuevo>+ Nuevo producto</button></div>
     <div class="field" style="max-width:360px;margin-bottom:var(--space-4)"><label class="sr-only" for="prod-buscar">Buscar</label><input class="input" id="prod-buscar" type="search" placeholder="Buscar producto o categoría…"></div>
     <div class="table-wrap"><table class="table">
-      <thead><tr><th></th><th>Nombre</th><th>Categoría</th><th class="num">Precio</th><th class="num">Stock</th><th>Disponible</th><th>Destacado</th><th></th></tr></thead>
+      <thead><tr><th><span class="sr-only">Foto</span></th><th>Nombre</th><th>Categoría</th><th class="num">Precio</th><th class="num">Stock</th><th>Disponible</th><th>Destacado</th><th><span class="sr-only">Acciones</span></th></tr></thead>
       <tbody></tbody>
     </table></div>`;
   pintarLista();

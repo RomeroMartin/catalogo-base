@@ -78,7 +78,7 @@ function vistaInvitado() {
   }
 
   if (pestana === 'registro') {
-    pintar(`<div class="auth-box">${tabs}
+    pintar(`<div class="auth-box"><h1 class="sr-only">Registrarme</h1>${tabs}
       <form class="stack" id="form-registro" novalidate>
         ${campo('nombre', 'Nombre y apellido', 'text', 'autocomplete="name" required')}
         ${campo('email', 'Email', 'email', 'autocomplete="email" required')}
@@ -90,7 +90,7 @@ function vistaInvitado() {
     return;
   }
 
-  pintar(`<div class="auth-box">${tabs}
+  pintar(`<div class="auth-box"><h1 class="sr-only">Ingresar</h1>${tabs}
     <form class="stack" id="form-ingresar" novalidate>
       ${campo('email', 'Email', 'email', 'autocomplete="email" required')}
       ${campo('password', 'Contraseña', 'password', 'autocomplete="current-password" required')}

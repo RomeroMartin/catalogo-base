@@ -17,7 +17,7 @@ async function cargar() {
 function pintar() {
   cont.innerHTML = categorias.length ? `
     <div class="table-wrap"><table class="table">
-      <thead><tr><th>Orden</th><th>Categoría</th><th>Slug</th><th>Activa</th><th></th></tr></thead>
+      <thead><tr><th>Orden</th><th>Categoría</th><th>Slug</th><th>Activa</th><th><span class="sr-only">Acciones</span></th></tr></thead>
       <tbody>${categorias.map((c, i) => `
         <tr data-id="${c.id}">
           <td style="white-space:nowrap">

@@ -152,7 +152,12 @@ async function vistaCliente(m, datos, config, user) {
       });
       if (error) {
         // Los mensajes del servidor están redactados para el usuario: se muestran tal cual
-        msgBox.className = 'form-error'; msgBox.setAttribute('role', 'alert'); msgBox.textContent = error.message;
+        // Solo se muestran tal cual los mensajes que escribió la función de la base (raise exception → P0001) o el aviso de sesión;
+        // cualquier otro error de la base (detalles internos) se reemplaza por un mensaje genérico.
+        const propio = error.code === 'P0001' || error.code === '28000';
+        console.error('crear_pedido falló', error);
+        msgBox.className = 'form-error'; msgBox.setAttribute('role', 'alert');
+        msgBox.textContent = propio ? error.message : 'No pudimos crear tu pedido. Revisá tu carrito y probá de nuevo.';
         actual = await rehidratar(); pintarResumen();
         if (!actual.lineas.length) btn.disabled = true;
         return;

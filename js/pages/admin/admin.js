@@ -47,8 +47,8 @@ function vistaPanel(user) {
   usuarioEnPanel = user.id;
   raiz.innerHTML = `
     <div class="admin">
-      <nav class="admin-nav" role="tablist" aria-label="Secciones del panel">
-        ${PESTANAS.map(([id, texto]) => `<button type="button" role="tab" id="tab-${id}" data-tab="${id}" aria-selected="false">${texto}</button>`).join('')}
+      <nav class="admin-nav" aria-label="Secciones del panel">
+        ${PESTANAS.map(([id, texto]) => `<button type="button" id="tab-${id}" data-tab="${id}">${texto}</button>`).join('')}
         <button type="button" class="btn-ghost" data-salir style="margin-top:var(--space-2)">Cerrar sesión</button>
       </nav>
       <section id="admin-vista" tabindex="-1" aria-live="polite"></section>
@@ -67,7 +67,7 @@ async function irAPestana(id) {
   if (!vista) return;
   pestanaActual = id;
   const turno = ++turnoCarga;
-  PESTANAS.forEach(([p]) => $(`#tab-${p}`)?.setAttribute('aria-selected', String(p === id)));
+  PESTANAS.forEach(([p]) => { const b = $(`#tab-${p}`); if (p === id) b?.setAttribute('aria-current', 'page'); else b?.removeAttribute('aria-current'); });
   vista.innerHTML = '<div class="skeleton" style="height:160px"></div>';
   try {
     const modulo = await import(`./${id}.js`);
