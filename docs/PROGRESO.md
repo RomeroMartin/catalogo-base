@@ -3,7 +3,7 @@
 | Fase | Estado | Fecha | Notas / decisiones |
 |---|---|---|---|
 | 0 Preparación | ✅ | 2026-10-20 | Martin confirmó repo, Supabase y red |
-| 1 Base de datos | ⬜ pendiente | | |
+| 1 Base de datos | 🟨 en curso | 2026-10-20 | SQL copiado textual de los apéndices A, B y C; falta que Martin lo ejecute en Supabase (Parada 1) |
 | 2 Diseño visual | ⬜ pendiente | | |
 | 3 Esqueleto y capa de datos | ⬜ pendiente | | |
 | 4 Autenticación | ⬜ pendiente | | |
