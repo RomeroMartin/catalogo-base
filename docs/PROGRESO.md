@@ -7,7 +7,7 @@
 | 2 Diseño visual | ✅ | 2026-10-20 | CSS y styleguide hechos; falta aprobación de Martin (Parada 2). Ajustes vs plan: --color-whatsapp #1A7F44 (contraste AA con texto blanco), --color-muted #6B625B, nuevo --color-warning |
 | 3 Esqueleto y capa de datos | ✅ | 2026-10-20 | Desplegado en Cloudflare Pages; Martin verificó. CSP: se agregó cdn.jsdelivr.net a connect-src (sourcemaps) |
 | 4 Autenticación | ✅ | 2026-10-20 | Verificada por Martin en Cloudflare |
-| 5 Home y catálogo | 🟨 en curso | 2026-10-20 | Home, catálogo y modal listos; botón Agregar es provisorio (aviso) hasta la Fase 6; falta prueba real de Martin (Parada 5) |
+| 5 Home y catálogo | ✅ | 2026-10-20 | Verificada por Martin. El botón Agregar es provisorio (aviso) hasta la Fase 6 |
 | 6 Carrito y pedidos | ⬜ pendiente | | |
 | 7 Cuenta del cliente | ⬜ pendiente | | |
 | 8 Panel de administración | ⬜ pendiente | | |
@@ -27,3 +27,4 @@ Estados: ⬜ pendiente · 🟨 en curso · ✅ hecha y verificada por Martin.
 - Habilitar dominios en la red del entorno (ver arriba).
 - Pegar el plan completo en el repo ya está hecho en `docs/PLAN.md`; el repo no tenía README ni commits previos.
 - La clave publishable de Supabase la tiene Martin; se escribe en `js/site.config.js` en la Fase 3 (pública por diseño, no va en este archivo).
+- Siguiente: **Fase 6 (carrito y pedidos)**. Martin pausó la sesión después de la Parada 5. Acuerdo: Claude mergea los PR a `main` al cerrar cada fase y Martin prueba en Cloudflare.
