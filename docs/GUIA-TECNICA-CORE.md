@@ -126,3 +126,10 @@ $('#grilla').innerHTML = productos.map((p) => `
 - **Nada de `await` dentro del callback de `onAuth`.**
 - **Mensajes del servidor:** solo se muestran tal cual los de `raise exception` (código `P0001`); cualquier otro error de la base se reemplaza por uno genérico.
 - **iOS:** `window.open` después de un `await` se bloquea; por eso el pedido termina con un botón "Abrir WhatsApp".
+
+## 12. Dejar el demo como nuevo
+Después de mostrar el demo a varios clientes, o de probarlo mucho, se limpia con los scripts de `supabase/` (**solo en el proyecto del demo**, nunca en el de un cliente):
+1. `diagnostico-demo.sql` — solo lectura: cuenta lo que hay y lista los usuarios.
+2. `reiniciar-demo.sql` — borra pedidos, clientes de prueba (menos los administradores, a los que deja el perfil anónimo), carritos y catálogo; reinicia el contador de pedidos (`CN-00001`). Corre en una transacción y se frena solo si la tienda no se llama "Casa Nube…".
+3. `seed.sql` — recarga la tienda "Casa Nube" (datos ficticios) y sus 12 productos de ejemplo.
+4. A mano: Supabase → Storage → bucket `productos` → borrar las carpetas (las fotos de los productos borrados quedan huérfanas).
