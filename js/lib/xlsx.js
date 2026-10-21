@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Generador mínimo de archivos Excel (.xlsx) en el navegador, sin librerías ni build.
 // Un .xlsx es un ZIP con archivos XML: acá se arma ese ZIP (sin comprimir) a mano.
 // El resultado es una hoja con una TABLA de Excel (encabezado con filtros, filas alternadas,

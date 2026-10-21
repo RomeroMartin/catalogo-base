@@ -42,7 +42,7 @@ Marcá cada casilla a medida que avanzás.
 - [ ] (Recomendado) Creá también tu propio usuario admin para soporte.
 
 ## 6. Personalizar el código (en el repo nuevo)
-- [ ] `js/site.config.js`: `supabaseUrl`, `supabaseAnonKey` y, si usa formulario de contacto, `formspreeId`. Revisá `credito` (el texto del pie; dejalo vacío si no corresponde) y `carritoKey` (podés dejarla).
+- [ ] `js/site.config.js`: `supabaseUrl`, `supabaseAnonKey`, **`demo: false`** (apaga el cartel "Demo funcional") y, si usa formulario de contacto, `formspreeId`. Revisá `credito` (el texto del pie; dejalo vacío si no corresponde) y `carritoKey` (podés dejarla).
 - [ ] `css/theme.css`: colores y tipografías del cliente. Las tipografías están **autoalojadas** (`assets/fonts/*.woff2`, subconjunto latino): para cambiarlas, reemplazá los archivos, ajustá los `@font-face` y las variables `--font-*` de `theme.css`, y actualizá los `<link rel="preload">` de `index.html`, `catalogo.html`, `cuenta.html` y `admin/index.html` (están marcados con `<!-- CLIENTE -->`). Si preferís Google Fonts, agregá su `<link>` a los 4 HTML y sumá `https://fonts.googleapis.com` a `style-src` y `https://fonts.gstatic.com` a `font-src` en `_headers`. Mantené el contraste suficiente entre texto y fondo.
 - [ ] `assets/`: reemplazá `favicon.svg` y `og-image.png` (imagen para compartir, 1200×630).
 - [ ] Buscá `CLIENTE` en todo el proyecto y resolvé cada marca. En general:
@@ -60,6 +60,7 @@ Marcá cada casilla a medida que avanzás.
 - [ ] (Opcional) Dominio propio: Cloudflare Pages → *Custom domains*. Después sumá el dominio nuevo a las *Redirect URLs* de Supabase y cambiá la *Site URL*.
 
 ## 8. Seguridad
+- [ ] Corré la verificación automática: `cd tests && npm install && node verificar-sitio.mjs --cliente` (ver `tests/README.md`). Tiene que decir `✓ TODO OK`. Para diseños a medida, leé antes `docs/GUIA-TECNICA-CORE.md`.
 - [ ] Corré `supabase/tests/rls_tests.sql` en el SQL Editor. **Resultado correcto: un recuadro rojo que dice `RESULTADO: TODOS LOS TESTS OK (36/36)`** (es un error a propósito para que no quede nada guardado). Si dice otra cosa, **no entregues**.
 - [ ] Confirmá que no hay claves secretas en el repo: `git log -p | grep -i service_role` no debe mostrar claves (solo menciones en comentarios).
 - [ ] (Opcional) **Authentication → Attack Protection**: activar CAPTCHA (Cloudflare Turnstile).

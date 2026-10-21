@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Consultas del lado público: catálogo completo (se filtra en el navegador).
 import { supabase } from '../supabase-client.js';
 

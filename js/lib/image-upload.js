@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Compresión de fotos en el navegador y subida a Supabase Storage (bucket `productos`).
 // Cada foto se guarda en DOS archivos: `thumb` (400 px) y `full` (1200 px). No se guarda el original.
 import { supabase } from '../supabase-client.js';

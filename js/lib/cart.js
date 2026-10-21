@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Estado del carrito. Se guarda SOLO { producto_id, modelo_id, qty } (nunca precios ni imágenes)
 // y se "rehidrata" desde la base cada vez que hace falta mostrarlo.
 // Si el cliente está logueado, el carrito también se sincroniza con la tabla `carritos`.

@@ -1,3 +1,4 @@
+// ░ SITIO — capa de diseño: se puede rediseñar por cliente usando las funciones del motor (js/lib/)
 // Catálogo: filtros por categoría (sincronizados con la URL), búsqueda, orden y modal de producto.
 import { initLayout } from '../components/layout.js';
 import { cardHTML, mediaHTML, emojiSiFalla, skeletonCards } from '../components/producto-card.js';

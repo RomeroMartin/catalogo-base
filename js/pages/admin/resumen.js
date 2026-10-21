@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Pestaña Resumen: tarjetas, ventas de los últimos 6 meses, más vendidos y pedidos por estado.
 import { supabase } from '../../supabase-client.js';
 import { esc } from '../../lib/dom.js';

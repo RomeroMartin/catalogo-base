@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Pestaña Productos: lista con filtros rápidos, alta/edición (con modelos) y baja.
 // Guardado NO atómico, en este orden: 1) fotos nuevas (compresión + subida)  2) producto  3) modelos (diferencia por id).
 import { supabase } from '../../supabase-client.js';

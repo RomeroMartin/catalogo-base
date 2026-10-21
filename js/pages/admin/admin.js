@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Panel de administración: login, guardia de admin y router de pestañas.
 // La seguridad REAL es RLS en la base; la guardia de acá es solo experiencia de usuario.
 import { initLayout } from '../../components/layout.js';

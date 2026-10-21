@@ -5,6 +5,12 @@ Plantilla de catálogo web con cuentas de cliente, carrito, pedidos por WhatsApp
 
 > Estado del proyecto: ver [`docs/PROGRESO.md`](docs/PROGRESO.md). El plan completo está en [`docs/PLAN.md`](docs/PLAN.md).
 
+## Cómo está organizado: motor, panel y sitio
+- **Motor** (`js/lib/`, `supabase/`): carrito, pedidos, cuentas, base de datos y seguridad. Igual para todos los clientes.
+- **Panel** (`admin/`, `js/pages/admin/`): igual para todos; solo cambian colores y logo.
+- **Sitio público** (`index.html`, `catalogo.html`, `cuenta.html`, `js/pages/`, `js/components/`, `css/`): se diseña a medida por cliente usando el motor.
+- Guía para quien programa: [`docs/GUIA-TECNICA-CORE.md`](docs/GUIA-TECNICA-CORE.md). Verificación automática: [`tests/README.md`](tests/README.md).
+
 ## ¿Qué es demo y qué es plantilla?
 - **Plantilla (lo que se reutiliza):** todo el código (`index.html`, `catalogo.html`, `cuenta.html`, `admin/`, `css/`, `js/`), `supabase/schema.sql`, `supabase/tests/rls_tests.sql` y `docs/MANUAL-ADMIN.md`.
 - **Solo del demo "Casa Nube":** `supabase/seed.sql` (datos ficticios) y `docs/styleguide.html` (guía visual). En un cliente nuevo no se usan.

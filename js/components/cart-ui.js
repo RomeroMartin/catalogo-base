@@ -1,3 +1,4 @@
+// ░ SITIO — capa de diseño: se puede rediseñar por cliente usando las funciones del motor (js/lib/)
 // Contenido del drawer del carrito: líneas, cantidades, total y botón de confirmar.
 import { $, esc, on } from '../lib/dom.js';
 import { money } from '../lib/format.js';
@@ -73,7 +74,7 @@ export function initCartUI() {
   on(drawer, 'click', '[data-quitar]', (_e, el) => quitar(el.closest('[data-clave]').dataset.clave));
   on(drawer, 'click', '[data-confirmar]', async () => {
     cerrarModal(drawer);
-    const { abrirCheckout } = await import('../lib/checkout.js'); // se descarga recién ahora (carga inicial más liviana)
+    const { abrirCheckout } = await import('./checkout-ui.js'); // se descarga recién ahora (carga inicial más liviana)
     abrirCheckout();
   });
 

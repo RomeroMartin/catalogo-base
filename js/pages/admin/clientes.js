@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Pestaña Clientes: lista con cantidad de pedidos, detalle con sus pedidos y exportación a Excel.
 import { supabase } from '../../supabase-client.js';
 import { esc, on, toast } from '../../lib/dom.js';

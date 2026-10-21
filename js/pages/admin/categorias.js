@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Pestaña Categorías: alta, edición, orden con ↑↓, activar/desactivar y borrado.
 import { supabase } from '../../supabase-client.js';
 import { esc, on, toast, cerrarModal } from '../../lib/dom.js';

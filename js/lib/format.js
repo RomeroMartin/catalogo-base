@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Formatos de dinero, fechas y slugs (es-AR, pesos sin centavos).
 import { SITE } from '../site.config.js';
 
