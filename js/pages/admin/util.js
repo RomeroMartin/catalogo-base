@@ -60,6 +60,12 @@ export function confirmar(texto, { si = 'Eliminar', peligro = true } = {}) {
   });
 }
 
+// Marca de fecha y hora para nombres de archivo: 2026-10-21_1530
+export function marcaTiempo() {
+  const d = new Date(), z = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}_${z(d.getHours())}${z(d.getMinutes())}`;
+}
+
 export const soloDigitos = (s) => String(s ?? '').replace(/\D/g, '');
 
 export const errorAmable = (err, porDefecto = 'No pudimos completar la operación. Probá de nuevo.') => {

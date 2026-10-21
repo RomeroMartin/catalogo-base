@@ -63,8 +63,13 @@ const pestanaDesdeHash = () => {
 };
 
 async function irAPestana(id) {
-  const vista = $('#admin-vista');
+  let vista = $('#admin-vista');
   if (!vista) return;
+  // Cada pestaña se dibuja en un contenedor NUEVO. Si se reutilizara el mismo, los eventos de clic de las
+  // pestañas anteriores seguirían activos y una sola acción dispararía varias (descargas y ventanas repetidas).
+  const limpio = vista.cloneNode(false); // copia los atributos pero NO los eventos
+  vista.replaceWith(limpio);
+  vista = limpio;
   pestanaActual = id;
   const turno = ++turnoCarga;
   PESTANAS.forEach(([p]) => { const b = $(`#tab-${p}`); if (p === id) b?.setAttribute('aria-current', 'page'); else b?.removeAttribute('aria-current'); });
