@@ -4,6 +4,7 @@ import { supabase } from '../../supabase-client.js';
 import { esc, on, toast, cerrarModal } from '../../lib/dom.js';
 import { money } from '../../lib/format.js';
 import { imgUrl } from '../../lib/image-url.js';
+import { emojiSiFalla } from '../../components/producto-card.js';
 import { abrirDialogo, confirmar, conCarga, claseStock } from './util.js';
 import { MAX_FOTOS, procesarImagen, subirFoto, borrarArchivos, rutasDe, kb } from '../../lib/image-upload.js';
 
@@ -35,7 +36,7 @@ function pintarLista() {
     const total = stockTotal(p);
     return `
       <tr data-id="${esc(p.id)}">
-        <td>${portada ? `<img class="thumb-sm" src="${esc(imgUrl(portada))}" alt="" width="44" height="44" loading="lazy">` : `<span class="thumb-sm" style="display:inline-flex;align-items:center;justify-content:center" aria-hidden="true">${esc(p.emoji || '🛍️')}</span>`}</td>
+        <td>${portada ? `<img class="thumb-sm" src="${esc(imgUrl(portada))}" alt="" width="44" height="44" loading="lazy" data-emoji="${esc(p.emoji || '🛍️')}">` : `<span class="thumb-sm" style="display:inline-flex;align-items:center;justify-content:center" aria-hidden="true">${esc(p.emoji || '🛍️')}</span>`}</td>
         <td><strong>${esc(p.nombre)}</strong>${p.tiene_variantes ? ` <span class="badge badge-primary">${p.modelos.length} modelos</span>` : ''}</td>
         <td>${esc(p.categoria?.nombre ?? '')}</td>
         <td class="num">${money(p.precio)}</td>
@@ -296,6 +297,7 @@ export async function render(el) {
       <tbody></tbody>
     </table></div>`;
   pintarLista();
+  emojiSiFalla(el);
 
   el.querySelector('#prod-buscar').addEventListener('input', (ev) => { filtro = ev.target.value; pintarLista(); });
   on(el, 'click', '[data-nuevo]', () => {

@@ -98,7 +98,7 @@ async function vistaCliente(m, datos, config, user) {
     <form id="form-pedido" novalidate>
       <div class="modal-body stack">
         <div id="checkout-resumen"></div>
-        <fieldset class="stack" style="border:0;padding:0">
+        <fieldset class="stack radios" style="border:0;padding:0">
           <legend class="label">Entrega</legend>
           <label class="check"><input type="radio" name="entrega" value="envio" checked> Envío a domicilio</label>
           <label class="check"><input type="radio" name="entrega" value="retiro"> Retiro por el local</label>
@@ -190,7 +190,7 @@ function exito(m, pedido, { config, entrega, direccion, notas, user, direccionPr
       <p>Total: <strong>${money(pedido.total)}</strong></p>
       <p class="muted">Para terminar, enviá el pedido por WhatsApp. Lo vamos a confirmar con vos.</p>
       <a class="btn btn-whatsapp btn-lg btn-block" id="btn-wa" href="${esc(href)}" target="_blank" rel="noopener">Abrir WhatsApp</a>
-      <a href="${raiz}cuenta.html">Ver mis pedidos</a>
+      <a class="link-more" href="${raiz}cuenta.html">Ver mis pedidos</a>
     </div>`;
 
   vaciar();

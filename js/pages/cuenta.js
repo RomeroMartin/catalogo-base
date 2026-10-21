@@ -180,7 +180,7 @@ async function vistaLogueado(user) {
 function pintarPedidos() {
   const cont = $('#lista-pedidos');
   if (!pedidos.length) {
-    cont.innerHTML = `<div class="empty"><span class="emoji" aria-hidden="true">🛍️</span>Todavía no hiciste pedidos.<br><a href="catalogo.html">Ver el catálogo</a></div>`;
+    cont.innerHTML = `<div class="empty"><span class="emoji" aria-hidden="true">🛍️</span>Todavía no hiciste pedidos.<br><a class="link-more" href="catalogo.html">Ver el catálogo</a></div>`;
     return;
   }
   cont.innerHTML = pedidos.map((p) => {
