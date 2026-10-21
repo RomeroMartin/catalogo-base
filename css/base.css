@@ -133,3 +133,7 @@ p + p { margin-top: var(--space-3); }
 
 /* Grupo de opciones (radios): sin el espacio doble de .stack + altura táctil */
 .radios > .check + .check { margin-top: 0; }
+
+/* Barra de búsqueda + filtro (catálogo y lista de pedidos del panel): separada de lo que la rodea */
+.toolbar { display: grid; gap: var(--space-3); margin-block: var(--space-5) var(--space-4); }
+@media (min-width: 768px) { .toolbar { grid-template-columns: 1fr 240px; } }

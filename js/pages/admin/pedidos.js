@@ -26,7 +26,7 @@ function pintar(cont) {
     const [texto, clase] = ESTADOS[p.estado] ?? [p.estado, ''];
     const tel = soloDigitos(p.cliente_telefono);
     return `
-      <details class="order" data-id="${esc(p.id)}">
+      <details class="order order-admin" data-id="${esc(p.id)}">
         <summary>
           <strong>${esc(p.codigo)}</strong>
           <span>${esc(p.cliente_nombre ?? 'Sin nombre')}</span>
