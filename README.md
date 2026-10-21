@@ -13,7 +13,7 @@ Plantilla de catálogo web con cuentas de cliente, carrito, pedidos por WhatsApp
 
 ## ¿Qué es demo y qué es plantilla?
 - **Plantilla (lo que se reutiliza):** todo el código (`index.html`, `catalogo.html`, `cuenta.html`, `admin/`, `css/`, `js/`), `supabase/schema.sql`, `supabase/tests/rls_tests.sql` y `docs/MANUAL-ADMIN.md`.
-- **Solo del demo "Casa Nube":** `supabase/seed.sql` (datos ficticios) y `docs/styleguide.html` (guía visual). En un cliente nuevo no se usan.
+- **Solo del demo "Casa Nube":** `supabase/seed.sql` (datos ficticios), `supabase/diagnostico-demo.sql` y `supabase/reiniciar-demo.sql` (dejan el demo como nuevo; **nunca** en un cliente) y `docs/styleguide.html` (guía visual). En un cliente nuevo no se usan.
 - **Para montar un cliente nuevo:** seguí [`docs/SETUP-NUEVO-CLIENTE.md`](docs/SETUP-NUEVO-CLIENTE.md). Todo lo que hay que cambiar está marcado con `CLIENTE` en el código (buscalo con `grep -rn CLIENTE .`).
 - **Para la dueña del negocio:** [`docs/MANUAL-ADMIN.md`](docs/MANUAL-ADMIN.md).
 
