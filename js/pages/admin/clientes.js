@@ -3,7 +3,7 @@ import { supabase } from '../../supabase-client.js';
 import { esc, on, toast } from '../../lib/dom.js';
 import { money, fecha } from '../../lib/format.js';
 import { descargarXLSX } from '../../lib/xlsx.js';
-import { ESTADOS, soloDigitos } from './util.js';
+import { ESTADOS, marcaTiempo, soloDigitos } from './util.js';
 
 let clientes = [];
 let pedidos = [];
@@ -56,7 +56,7 @@ export async function render(el) {
   });
   on(el, 'click', '[data-exportar]', () => {
     if (!clientes.length) { toast('Todavía no hay clientes para exportar', 'error'); return; }
-    descargarXLSX(`clientes-${new Date().toISOString().slice(0, 10)}.xlsx`, {
+    descargarXLSX(`clientes_${marcaTiempo()}.xlsx`, {
       hoja: 'Clientes', tabla: 'Clientes',
       columnas: [{ titulo: 'Nombre' }, { titulo: 'Email' }, { titulo: 'Teléfono' }, { titulo: 'Alta', tipo: 'dia' }, { titulo: 'Pedidos', tipo: 'numero' }],
       filas: clientes.map((c) => [c.nombre, c.email, c.telefono, c.creado, cantidad(c.id)]),

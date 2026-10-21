@@ -3,7 +3,7 @@ import { supabase } from '../../supabase-client.js';
 import { esc, on, toast } from '../../lib/dom.js';
 import { money } from '../../lib/format.js';
 import { descargarXLSX } from '../../lib/xlsx.js';
-import { ESTADOS, fechaHora, soloDigitos } from './util.js';
+import { ESTADOS, fechaHora, marcaTiempo, soloDigitos } from './util.js';
 
 let pedidos = [];
 let filtroEstado = '';
@@ -59,7 +59,7 @@ function pintar(cont) {
 function exportar() {
   const lista = visibles();
   if (!lista.length) { toast('No hay pedidos para exportar con esos filtros', 'error'); return; }
-  descargarXLSX(`pedidos-${new Date().toISOString().slice(0, 10)}.xlsx`, {
+  descargarXLSX(`pedidos_${marcaTiempo()}.xlsx`, {
     hoja: 'Pedidos', tabla: 'Pedidos',
     columnas: [
       { titulo: 'Código' }, { titulo: 'Fecha', tipo: 'fecha' }, { titulo: 'Cliente' }, { titulo: 'Email' }, { titulo: 'Teléfono' },
