@@ -16,6 +16,7 @@ Plantilla de catálogo web con cuentas de cliente, carrito, pedidos por WhatsApp
 - **Solo del demo "Casa Nube":** `supabase/seed.sql` (datos ficticios), `supabase/diagnostico-demo.sql` y `supabase/reiniciar-demo.sql` (dejan el demo como nuevo; **nunca** en un cliente) y `docs/styleguide.html` (guía visual). En un cliente nuevo no se usan.
 - **Para montar un cliente nuevo:** seguí [`docs/SETUP-NUEVO-CLIENTE.md`](docs/SETUP-NUEVO-CLIENTE.md). Todo lo que hay que cambiar está marcado con `CLIENTE` en el código (buscalo con `grep -rn CLIENTE .`).
 - **Para la dueña del negocio:** [`docs/MANUAL-ADMIN.md`](docs/MANUAL-ADMIN.md).
+- **Para Martin (del "sí" del cliente a la entrega):** [`docs/GUIA-NUEVO-CLIENTE-MARTIN.md`](docs/GUIA-NUEVO-CLIENTE-MARTIN.md).
 
 ## Correrlo en local
 Los módulos ES no funcionan abriendo el archivo con doble clic; hace falta un servidor local:
