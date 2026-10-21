@@ -17,6 +17,7 @@ export function emojiSiFalla(contenedor) {
     const img = ev.target;
     if (img.tagName !== 'IMG' || !img.dataset.emoji) return;
     const span = document.createElement('span');
+    span.className = img.className; // conserva el estilo de la miniatura (por ejemplo, la del panel)
     span.setAttribute('aria-hidden', 'true');
     span.textContent = img.dataset.emoji;
     img.replaceWith(span);
@@ -29,6 +30,7 @@ const colorCat = (p) => (p.categoria?.slug ? `style="--cat-color:var(--cat-${esc
 // `rapida`: fotos de la primera pantalla (sin carga diferida y con prioridad, para que el LCP sea rápido)
 // `nivel`: h3 cuando la tarjeta está bajo un h2 (home); h2 en el catálogo, donde el título de la página es el h1
 export function cardHTML(p, nivel = 'h3', rapida = false) {
+  const h = ['h2', 'h3', 'h4'].includes(nivel) ? nivel : 'h3'; // nunca un valor suelto (por ejemplo, el índice que pasa Array.map)
   const agotado = estaAgotado(p);
   const badges = [
     agotado ? '<span class="badge badge-danger">Sin stock</span>' : '',
@@ -46,7 +48,7 @@ export function cardHTML(p, nivel = 'h3', rapida = false) {
         <span class="card-badges">${badges}</span>
       </a>
       <div class="card-body">
-        <${nivel} class="card-title">${esc(p.nombre)}</${nivel}>
+        <${h} class="card-title">${esc(p.nombre)}</${h}>
         <span class="card-price">${money(p.precio)}</span>
         ${boton}
       </div>

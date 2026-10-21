@@ -72,7 +72,7 @@
 
     <section class="section" aria-labelledby="t-destacados">
       <div class="container">
-        <div class="section-head"><h2 id="t-destacados">Destacados</h2><a href="catalogo.html">Ver todo</a></div>
+        <div class="section-head"><h2 id="t-destacados">Destacados</h2><a class="link-more" href="catalogo.html">Ver todo</a></div>
         <div class="grid" id="destacados"></div>
       </div>
     </section>
@@ -90,9 +90,9 @@
           <h2 id="t-contacto">Envíos y contacto</h2>
           <p data-config="envio_texto"></p>
           <ul class="contact-list">
-            <li><a data-config="whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a data-config="instagram-link" href="#" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a data-config="email-link" href="#"><span data-config="email"></span></a></li>
+            <li><a data-config="whatsapp-link" href="#" target="_blank" rel="noopener"><span aria-hidden="true">💬</span> WhatsApp</a></li>
+            <li><a data-config="instagram-link" href="#" target="_blank" rel="noopener"><span aria-hidden="true">📸</span> Instagram</a></li>
+            <li><a data-config="email-link" href="#"><span aria-hidden="true">✉️</span> <span data-config="email"></span></a></li>
           </ul>
         </div>
         <!-- El formulario de contacto (Formspree) lo agrega home.js solo si SITE.formspreeId no está vacío -->

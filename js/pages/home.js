@@ -23,7 +23,7 @@ async function pintarDestacados() {
   try {
     const destacados = (await listProductos()).filter((p) => p.destacado).slice(0, 8);
     if (!destacados.length) { contDestacados.closest('section').classList.add('hidden'); return; }
-    contDestacados.innerHTML = destacados.map(cardHTML).join('');
+    contDestacados.innerHTML = destacados.map((p) => cardHTML(p)).join('');
   } catch (err) {
     console.error('No se pudieron cargar los destacados', err);
     contDestacados.innerHTML = `<div class="empty" style="grid-column:1/-1">No pudimos cargar los productos. <button class="btn btn-sm" type="button" id="reintentar">Reintentar</button></div>`;

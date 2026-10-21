@@ -62,11 +62,11 @@
 body.no-scroll { overflow: hidden; }
 
 /* ── Toasts ── */
-.toasts { position: fixed; z-index: 80; left: 50%; bottom: var(--space-5); transform: translateX(-50%); display: flex; flex-direction: column; gap: var(--space-2); width: min(92vw, 420px); pointer-events: none; }
+.toasts { position: fixed; z-index: 80; left: 50%; top: calc(var(--header-h) + var(--space-3)); transform: translateX(-50%); display: flex; flex-direction: column; gap: var(--space-2); width: min(92vw, 420px); pointer-events: none; }
 .toast { pointer-events: auto; padding: var(--space-3) var(--space-4); border-radius: var(--radius); background: var(--color-ink); color: var(--color-bg); box-shadow: var(--shadow); font-weight: 500; animation: toast-in .2s ease; }
 .toast-ok     { background: var(--color-accent); color: var(--color-primary-ink); }
 .toast-error  { background: var(--color-danger); color: var(--color-primary-ink); }
-@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes toast-in { from { opacity: 0; transform: translateY(-8px); } }
 
 /* ── Footer ── */
 .site-footer { margin-top: var(--space-8); padding-block: var(--space-6); border-top: 1px solid var(--color-line); color: var(--color-muted); font-size: .92rem; }
@@ -92,3 +92,6 @@ body.no-scroll { overflow: hidden; }
 /* Reserva el alto del header y de la fila de categorías antes de que el JS los dibuje (evita saltos de diseño) */
 #app-header { display: block; min-height: calc(var(--header-h) + 1px); }
 #chips { min-height: calc(var(--tap) + var(--space-2)); }
+
+/* El acceso al panel (solo admin) se ve como botón, no como texto suelto */
+#admin-link { border: 1.5px solid var(--color-line); }

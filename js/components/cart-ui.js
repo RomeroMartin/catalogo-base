@@ -22,7 +22,7 @@ export async function pintarCarrito() {
       ? `<div class="form-error" role="status" style="margin-bottom:var(--space-3)">${avisos.map(esc).join('<br>')}</div>` : '';
 
     if (!lineas.length) {
-      cuerpo.innerHTML = `${aviso}<div class="empty"><span class="emoji" aria-hidden="true">🛒</span>Tu carrito está vacío.<br><a href="${document.documentElement.dataset.root || ''}catalogo.html">Ver el catálogo</a></div>`;
+      cuerpo.innerHTML = `${aviso}<div class="empty"><span class="emoji" aria-hidden="true">🛒</span>Tu carrito está vacío.<br><a class="link-more" href="${document.documentElement.dataset.root || ''}catalogo.html">Ver el catálogo</a></div>`;
       pie.innerHTML = '';
       return;
     }

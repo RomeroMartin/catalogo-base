@@ -37,7 +37,16 @@ p + p { margin-top: var(--space-3); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .hidden { display: none !important; }
 .section { padding-block: var(--space-7); }
-@media (min-width: 768px) { .section { padding-block: var(--space-8); } }
+@media (min-width: 768px) { .section { padding-block: calc(var(--space-7) + var(--space-4)); } }
+
+/* ── Encabezado de sección: título a la izquierda, acción a la derecha ── */
+.section-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); margin-bottom: var(--space-5); flex-wrap: wrap; }
+
+/* ── Enlace de "ver más" (en lugar del subrayado por defecto del navegador) ── */
+.link-more { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: 600; text-decoration: none; color: var(--color-primary-hover); }
+.link-more::after { content: "→"; transition: transform .15s; }
+.link-more:hover { color: var(--color-primary-hover); text-decoration: underline; text-underline-offset: 3px; }
+.link-more:hover::after { transform: translateX(3px); }
 
 /* ── Botones ── */
 .btn {
@@ -121,3 +130,6 @@ p + p { margin-top: var(--space-3); }
 /* ── Estados vacíos / error ── */
 .empty { text-align: center; padding: var(--space-7) var(--space-4); color: var(--color-muted); }
 .empty .emoji { font-size: 2.5rem; display: block; margin-bottom: var(--space-3); }
+
+/* Grupo de opciones (radios): sin el espacio doble de .stack + altura táctil */
+.radios > .check + .check { margin-top: 0; }
