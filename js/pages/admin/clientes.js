@@ -1,8 +1,9 @@
-// Pestaña Clientes: lista con cantidad de pedidos, detalle con sus pedidos y CSV.
+// Pestaña Clientes: lista con cantidad de pedidos, detalle con sus pedidos y exportación a Excel.
 import { supabase } from '../../supabase-client.js';
-import { esc, on } from '../../lib/dom.js';
+import { esc, on, toast } from '../../lib/dom.js';
 import { money, fecha } from '../../lib/format.js';
-import { ESTADOS, descargarCSV, soloDigitos } from './util.js';
+import { descargarXLSX } from '../../lib/xlsx.js';
+import { ESTADOS, soloDigitos } from './util.js';
 
 let clientes = [];
 let pedidos = [];
@@ -37,7 +38,7 @@ export async function render(el) {
   const cantidad = (id) => pedidos.filter((p) => p.cliente_id === id).length;
 
   el.innerHTML = `
-    <div class="section-head"><h1 style="font-size:1.8rem">Clientes</h1><button class="btn btn-sm" type="button" data-exportar>Exportar CSV</button></div>
+    <div class="section-head"><h1 style="font-size:1.8rem">Clientes</h1><button class="btn btn-sm" type="button" data-exportar>Exportar a Excel</button></div>
     <div class="table-wrap"><table class="table">
       <thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Alta</th><th class="num">Pedidos</th></tr></thead>
       <tbody>${clientes.length ? clientes.map((c) => `
@@ -54,9 +55,11 @@ export async function render(el) {
     cont.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
   on(el, 'click', '[data-exportar]', () => {
-    descargarCSV(`clientes-${new Date().toISOString().slice(0, 10)}.csv`, [
-      ['Nombre', 'Email', 'Teléfono', 'Alta', 'Pedidos'],
-      ...clientes.map((c) => [c.nombre, c.email, c.telefono, fecha(c.creado), cantidad(c.id)]),
-    ]);
+    if (!clientes.length) { toast('Todavía no hay clientes para exportar', 'error'); return; }
+    descargarXLSX(`clientes-${new Date().toISOString().slice(0, 10)}.xlsx`, {
+      hoja: 'Clientes', tabla: 'Clientes',
+      columnas: [{ titulo: 'Nombre' }, { titulo: 'Email' }, { titulo: 'Teléfono' }, { titulo: 'Alta', tipo: 'dia' }, { titulo: 'Pedidos', tipo: 'numero' }],
+      filas: clientes.map((c) => [c.nombre, c.email, c.telefono, c.creado, cantidad(c.id)]),
+    });
   });
 }

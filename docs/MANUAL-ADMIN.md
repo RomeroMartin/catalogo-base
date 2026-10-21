@@ -112,7 +112,7 @@ Cuando un cliente confirma un pedido, **te llega por WhatsApp** y además queda 
 | **Cancelado** | No se hizo | Si ya se había descontado, **se devuelve** |
 
 5. Para buscar: escribí el código o el nombre del cliente en el buscador, o filtrá por estado.
-6. **Exportar CSV**: baja una planilla con los pedidos que estás viendo. Se abre con Excel o Google Sheets.
+6. **Exportar a Excel**: baja un archivo de Excel (.xlsx) con los pedidos que estás viendo (si filtraste o buscaste, solo esos). Viene ya armado como **tabla**: con filtros en cada columna, filas alternadas y el dinero y las fechas con su formato. Se abre con Excel o con Google Sheets.
 
 > El stock **se descuenta recién cuando pasás el pedido a Confirmado**, no cuando el cliente lo hace. Así podés rechazar un pedido sin que se pierda stock.
 
@@ -122,7 +122,7 @@ Cuando un cliente confirma un pedido, **te llega por WhatsApp** y además queda 
 
 - Lista con nombre, email, teléfono, fecha de alta y cantidad de pedidos.
 - Tocá el nombre de un cliente para ver todos sus pedidos y escribirle por WhatsApp.
-- **Exportar CSV** baja la lista completa.
+- **Exportar a Excel** baja la lista completa de clientes como tabla de Excel (.xlsx).
 
 ---
 

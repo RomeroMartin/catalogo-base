@@ -74,7 +74,7 @@ Marcá cada casilla a medida que avanzás.
 - [ ] Registro, login, logout y recuperar contraseña (el mail llega).
 - [ ] Catálogo: filtros, búsqueda, modal con modelos, carrusel.
 - [ ] Carrito como invitado y logueado; pedido completo: se guarda, abre WhatsApp y aparece en *Mis pedidos* y en el panel.
-- [ ] Panel: productos con fotos, stock, cambio de estado de pedidos (y que el stock se mueva), categorías, configuración, exportar CSV.
+- [ ] Panel: productos con fotos, stock, cambio de estado de pedidos (y que el stock se mueva), categorías, configuración, exportar a Excel.
 - [ ] Con una cuenta común, `/admin/` no muestra nada y no se ven pedidos de otros.
 
 ## 11. Entrega

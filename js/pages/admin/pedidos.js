@@ -1,8 +1,9 @@
-// Pestaña Pedidos: filtros, detalle, cambio de estado (el trigger de la base ajusta el stock) y CSV.
+// Pestaña Pedidos: filtros, detalle, cambio de estado (el trigger de la base ajusta el stock) y exportación a Excel.
 import { supabase } from '../../supabase-client.js';
 import { esc, on, toast } from '../../lib/dom.js';
 import { money } from '../../lib/format.js';
-import { ESTADOS, fechaHora, descargarCSV, soloDigitos } from './util.js';
+import { descargarXLSX } from '../../lib/xlsx.js';
+import { ESTADOS, fechaHora, soloDigitos } from './util.js';
 
 let pedidos = [];
 let filtroEstado = '';
@@ -54,14 +55,22 @@ function pintar(cont) {
   }).join('') : '<div class="empty"><span class="emoji" aria-hidden="true">📦</span>No hay pedidos con esos filtros.</div>';
 }
 
+// Exporta a Excel (.xlsx, como tabla) los pedidos que se están viendo con los filtros actuales
 function exportar() {
-  const filas = [['Código', 'Fecha', 'Cliente', 'Email', 'Teléfono', 'Estado', 'Entrega', 'Total', 'Productos']];
-  visibles().forEach((p) => filas.push([
-    p.codigo, fechaHora(p.creado), p.cliente_nombre, p.cliente_email, p.cliente_telefono,
-    ESTADOS[p.estado]?.[0] ?? p.estado, textoDireccion(p), p.total,
-    p.pedido_items.map((i) => `${i.nombre}${i.modelo ? ` (${i.modelo})` : ''} x${i.cantidad}`).join(' | '),
-  ]));
-  descargarCSV(`pedidos-${new Date().toISOString().slice(0, 10)}.csv`, filas);
+  const lista = visibles();
+  if (!lista.length) { toast('No hay pedidos para exportar con esos filtros', 'error'); return; }
+  descargarXLSX(`pedidos-${new Date().toISOString().slice(0, 10)}.xlsx`, {
+    hoja: 'Pedidos', tabla: 'Pedidos',
+    columnas: [
+      { titulo: 'Código' }, { titulo: 'Fecha', tipo: 'fecha' }, { titulo: 'Cliente' }, { titulo: 'Email' }, { titulo: 'Teléfono' },
+      { titulo: 'Estado' }, { titulo: 'Entrega' }, { titulo: 'Total', tipo: 'moneda' }, { titulo: 'Productos' },
+    ],
+    filas: lista.map((p) => [
+      p.codigo, p.creado, p.cliente_nombre, p.cliente_email, p.cliente_telefono,
+      ESTADOS[p.estado]?.[0] ?? p.estado, textoDireccion(p), p.total,
+      p.pedido_items.map((i) => `${i.nombre}${i.modelo ? ` (${i.modelo})` : ''} x${i.cantidad}`).join(' | '),
+    ]),
+  });
 }
 
 export async function render(el) {
@@ -71,7 +80,7 @@ export async function render(el) {
   pedidos = data;
 
   el.innerHTML = `
-    <div class="section-head"><h1 style="font-size:1.8rem">Pedidos</h1><button class="btn btn-sm" type="button" data-exportar>Exportar CSV</button></div>
+    <div class="section-head"><h1 style="font-size:1.8rem">Pedidos</h1><button class="btn btn-sm" type="button" data-exportar>Exportar a Excel</button></div>
     <div class="toolbar">
       <div class="field"><label class="sr-only" for="ped-buscar">Buscar</label><input class="input" id="ped-buscar" type="search" placeholder="Buscar por código o cliente…"></div>
       <div class="field"><label class="sr-only" for="ped-estado">Estado</label>
