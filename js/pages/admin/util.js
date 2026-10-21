@@ -60,22 +60,6 @@ export function confirmar(texto, { si = 'Eliminar', peligro = true } = {}) {
   });
 }
 
-// CSV con BOM UTF-8 (para que Excel lea bien las tildes) y separador ";" (Excel en español)
-export function descargarCSV(nombreArchivo, filas) {
-  const celda = (v) => {
-    let t = String(v ?? '');
-    if (/^[=+\-@]/.test(t)) t = `'${t}`; // evita que Excel interprete texto como fórmula
-    return `"${t.replace(/"/g, '""')}"`;
-  };
-  const texto = filas.map((f) => f.map(celda).join(';')).join('\r\n');
-  const blob = new Blob(['﻿', texto], { type: 'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = nombreArchivo;
-  document.body.append(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
 export const soloDigitos = (s) => String(s ?? '').replace(/\D/g, '');
 
 export const errorAmable = (err, porDefecto = 'No pudimos completar la operación. Probá de nuevo.') => {
