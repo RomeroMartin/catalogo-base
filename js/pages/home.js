@@ -1,3 +1,4 @@
+// ░ SITIO — capa de diseño: se puede rediseñar por cliente usando las funciones del motor (js/lib/)
 // Home: categorías, destacados y textos de la tienda (todo sale de la base).
 import { initLayout } from '../components/layout.js';
 import { cardHTML, emojiSiFalla, skeletonCards } from '../components/producto-card.js';

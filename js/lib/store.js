@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Configuración de la tienda y categorías, con caché de 5 minutos en sessionStorage.
 import { supabase } from '../supabase-client.js';
 

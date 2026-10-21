@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Pestaña Stock: edición rápida. Una fila por producto simple o por modelo; guarda al salir del campo.
 import { supabase } from '../../supabase-client.js';
 import { esc, on, toast } from '../../lib/dom.js';

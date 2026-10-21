@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Pestaña Configuración: datos de la tienda (tabla config, fila id = 1).
 import { supabase } from '../../supabase-client.js';
 import { esc, toast } from '../../lib/dom.js';

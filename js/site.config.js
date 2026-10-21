@@ -8,5 +8,6 @@ export const SITE = {
   locale: 'es-AR',
   moneda: 'ARS',
   carritoKey: 'cb_cart_v1', // localStorage; subir la versión si cambia el formato del carrito
+  demo: true,               // CLIENTE: true = muestra el cartel "Demo funcional" (solo en el demo); en un sitio de cliente poné false
   credito: { texto: 'Sitio por Martin Romero Studio', url: 'https://www.martinromerostudio.com.ar' }, // CLIENTE (o vacío)
 };

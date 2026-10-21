@@ -1,3 +1,4 @@
+// ░ SITIO — capa de diseño: se puede rediseñar por cliente usando las funciones del motor (js/lib/)
 // Inyecta header, drawer del carrito y footer en todas las páginas.
 // Cada HTML tiene <div id="app-header"></div> y <div id="app-footer"></div>.
 // <html data-root=""> (o "../" en admin/) indica cómo llegar a la raíz del sitio.
@@ -69,6 +70,24 @@ export function initLayout() {
           <span>${credito}</span>
         </div>
       </footer>`;
+  }
+
+  // Cartel del demo (flotante: no mueve el diseño). En un sitio de cliente SITE.demo es false y no aparece.
+  if (SITE.demo) {
+    let oculto = false;
+    try { oculto = sessionStorage.getItem('cb_demo_oculto') === '1'; } catch { /* ignorar */ }
+    if (!oculto) {
+      const cartel = document.createElement('div');
+      cartel.className = 'demo-badge';
+      cartel.setAttribute('role', 'region');
+      cartel.setAttribute('aria-label', 'Aviso del demo');
+      cartel.innerHTML = '<span><strong>Demo funcional</strong> · Tu sitio tendrá tu propio diseño</span><button type="button" aria-label="Cerrar este aviso"><span aria-hidden="true">✕</span></button>';
+      cartel.querySelector('button').addEventListener('click', () => {
+        cartel.remove();
+        try { sessionStorage.setItem('cb_demo_oculto', '1'); } catch { /* ignorar */ }
+      });
+      document.body.append(cartel);
+    }
   }
 
   // Menú móvil

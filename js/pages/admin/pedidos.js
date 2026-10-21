@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Pestaña Pedidos: filtros, detalle, cambio de estado (el trigger de la base ajusta el stock) y exportación a Excel.
 import { supabase } from '../../supabase-client.js';
 import { esc, on, toast } from '../../lib/dom.js';

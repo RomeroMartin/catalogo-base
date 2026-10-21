@@ -1,3 +1,4 @@
+// ░ SITIO — capa de diseño: se puede rediseñar por cliente usando las funciones del motor (js/lib/)
 // Tarjeta de producto y utilidades de imagen, compartidas por el home y el catálogo.
 import { esc } from '../lib/dom.js';
 import { money } from '../lib/format.js';

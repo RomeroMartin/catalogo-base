@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Utilidades de DOM: selectores, escape de texto, toasts, modales y delegación de eventos.
 
 export const $ = (sel, root = document) => root.querySelector(sel);

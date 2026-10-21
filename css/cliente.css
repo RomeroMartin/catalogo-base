@@ -1,0 +1,15 @@
+/* ============================================================
+   cliente.css — estilos PROPIOS de un cliente (opcional; vacío en el demo)
+
+   Cómo se usa:
+   1. En el <head> de index.html, catalogo.html y cuenta.html agregar, DESPUÉS de los demás <link rel="stylesheet">:
+        <link rel="stylesheet" href="css/cliente.css">
+      (No se agrega al panel de administración: admin/index.html sigue igual para todos.)
+   2. Acá solo se SOBRESCRIBE: fondos, formas, animaciones, aspecto de componentes. No se cambian nombres de
+      clases ni ids en el HTML o el JS: ver "Contrato de enganches" en docs/GUIA-TECNICA-CORE.md.
+   3. Colores, tipografías y espaciados van en css/theme.css (variables), no acá.
+   4. Toda animación respeta el movimiento reducido:
+        @media (prefers-reduced-motion: no-preference) { ... }
+   5. Nada de recursos externos (fuentes, imágenes, scripts de otros sitios): la política de seguridad los bloquea.
+      Las imágenes del cliente van en assets/.
+   ============================================================ */

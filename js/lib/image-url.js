@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // En la base se guardan RUTAS de imagen (no URLs). Acá se arma la URL pública del bucket.
 import { supabase } from '../supabase-client.js';
 

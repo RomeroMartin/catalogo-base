@@ -1,3 +1,4 @@
+// ▒ PANEL — igual para todos los clientes (solo cambian colores y logo desde theme.css)
 // Utilidades compartidas por las pestañas del panel.
 import { esc, on, abrirModal, cerrarModal } from '../../lib/dom.js';
 

@@ -1,3 +1,4 @@
+// ▓ MOTOR — igual para todos los clientes; no se edita por un pedido de diseño (ver docs/GUIA-TECNICA-CORE.md)
 // Autenticación. TODA la app usa onAuth() y nunca supabase.auth.onAuthStateChange directo.
 import { supabase } from '../supabase-client.js';
 

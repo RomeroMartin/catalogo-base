@@ -1,3 +1,4 @@
+// ░ SITIO — capa de diseño: se puede rediseñar por cliente usando las funciones del motor (js/lib/)
 // Cuenta del cliente: registro, login, recuperar contraseña, mis datos y mis pedidos.
 import { initLayout } from '../components/layout.js';
 import { getStore, applyBranding } from '../lib/store.js';

@@ -1,0 +1,11 @@
+{
+  "name": "catalogo-base-verificacion",
+  "private": true,
+  "type": "module",
+  "description": "Verificación automática del sitio (accesibilidad, política de seguridad, enlaces del motor y flujos principales). No se publica.",
+  "scripts": { "verificar": "node verificar-sitio.mjs" },
+  "devDependencies": {
+    "axe-core": "4.10.2",
+    "playwright": "1.56.1"
+  }
+}
