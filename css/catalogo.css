@@ -1,8 +1,6 @@
 /* ============================================================
    catalogo.css — barra de filtros, grilla, tarjeta y modal de producto
    ============================================================ */
-.toolbar { display: grid; gap: var(--space-3); margin-block: var(--space-5) var(--space-4); }
-@media (min-width: 768px) { .toolbar { grid-template-columns: 1fr 240px; } }
 
 .grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 768px)  { .grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); } }

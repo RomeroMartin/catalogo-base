@@ -15,3 +15,11 @@
 .order summary { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); align-items: center; justify-content: space-between; padding: var(--space-4); min-height: var(--tap); cursor: pointer; }
 .order-detail { padding: 0 var(--space-4) var(--space-4); display: grid; gap: var(--space-2); }
 .order-detail li { display: flex; justify-content: space-between; gap: var(--space-3); }
+
+/* En pantallas anchas las filas de pedidos se alinean en columnas (código · fecha · estado · total) */
+@media (min-width: 768px) {
+  .order summary { display: grid; grid-template-columns: 110px 1fr 120px 110px; gap: var(--space-4); align-items: center; }
+  .order-admin summary { grid-template-columns: 110px 1fr 1fr 120px 110px; }
+  .order summary > .badge { justify-self: start; }
+  .order summary > strong:last-child { justify-self: end; }
+}
