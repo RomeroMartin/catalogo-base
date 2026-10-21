@@ -13,9 +13,12 @@
 | 8 Panel de administración | ✅ | 2026-10-20 | Verificada por Martin |
 | 9 Subir foto | ✅ | 2026-10-20 | Verificada por Martin (PC, Android, iPhone) |
 | 10 Plantillización y docs | ✅ | 2026-10-20 | Verificada por Martin; repo marcado como plantilla |
-| 11 Seguridad final y publicación | 🟨 en curso | 2026-10-20 | Revisión de seguridad y accesibilidad hechas (ver abajo); falta el QA final de Martin (PC, Android, iPhone) y la prueba en producción |
+| 11 Seguridad final y publicación | ✅ | 2026-10-21 | QA final de Martin (PC, Android, iPhone), tests RLS 36/36 y Lighthouse móvil 92 · 100 · 100 · 100 |
 
 Estados: ⬜ pendiente · 🟨 en curso · ✅ hecha y verificada por Martin.
+
+## Estado final
+**Demo terminado el 2026-10-21.** Las 12 fases (0 a 11) están ✅ y verificadas por Martin. Lighthouse móvil sobre `catalogo.html`: Rendimiento 92 · Accesibilidad 100 · Prácticas recomendadas 100 · SEO 100.
 
 ## Datos de entorno (sin secretos)
 - Repo: RomeroMartin/catalogo-base · Proyecto Supabase (ref): pnxplpmyeozclhhpjfsq (URL base: https://pnxplpmyeozclhhpjfsq.supabase.co) · URL de Cloudflare Pages: https://catalogo-base.pages.dev/
@@ -43,3 +46,10 @@ Estados: ⬜ pendiente · 🟨 en curso · ✅ hecha y verificada por Martin.
 - Revisión de CSS por página (script que cruza las clases usadas por cada pantalla con los CSS que realmente carga): la única clase "huérfana" real era `.toolbar` (buscador + filtro), que estaba en `catalogo.css` y el panel no la carga; pasó a `base.css`. Además, las filas de pedidos (panel y "Mi cuenta") se alinean en columnas en pantallas anchas.
 - Exportación a Excel (pedido de Martin): Pedidos y Clientes ya no exportan CSV sino `.xlsx` con una **tabla de Excel** (filtros por columna, filas alternadas, primera fila fija, anchos ajustados, dinero `$ #.##0` y fechas con formato). Se genera en el navegador con `js/lib/xlsx.js` (sin librerías ni build; ZIP + XML a mano). Validado con LibreOffice y openpyxl; NO probado en Microsoft Excel real (Martin: abrir un archivo exportado y confirmar que no pide "reparar").
 - Bug del panel hallado por Martin (descargas repetidas): cada pestaña reutilizaba el mismo contenedor, así que los eventos de clic de las pestañas ya visitadas se acumulaban: una exportación disparaba 5 descargas (mezcladas de pedidos y clientes) y "Editar" de Productos abría varias ventanas (incluso la de "Nueva categoría"); también podían repetirse guardados de stock. Ahora cada pestaña se dibuja en un contenedor nuevo (`admin.js`). Los archivos exportados llevan fecha y hora (`pedidos_2026-10-21_1530.xlsx`, `clientes_…`) para no pisarse.
+
+## Deuda conocida y próximos pasos (no bloquean el demo)
+- Exportación a Excel (`js/lib/xlsx.js`): validada con LibreOffice y openpyxl; Martin la abrió en Excel real.
+- Caché de categorías/config del sitio: 5 min por pestaña (`CACHE_MS` en `js/lib/store.js`); bajar a 1 min si molesta al editar desde el panel.
+- Supabase Free: sin backups y el proyecto se pausa con ~1 semana sin actividad; antes de un cliente real, ver `docs/SETUP-NUEVO-CLIENTE.md` → "Después de la entrega" (email propio/SMTP, keepalive, backups, dominio propio, Mercado Pago).
+- Posible mejora de rendimiento si hiciera falta: autoalojar `supabase-js` (se aparta de la regla §3.2 del plan; decisión de Martin).
+- Idea opcional: exportar el Resumen (ventas por mes y más vendidos) a Excel, una hoja por reporte.
